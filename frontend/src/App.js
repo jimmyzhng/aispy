@@ -1,8 +1,8 @@
 import './App.css';
+import Auth from './components/Auth';
 import NavigationBar from './components/NavigationBar';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Register from './components/Register';
-import Login from './components/Login';
+
 
 function App() {
   return (
@@ -11,8 +11,8 @@ function App() {
         <NavigationBar />
         <div className="content">
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/auth" element={<Auth />} />
+
           </Routes>
         </div>
       </div>

@@ -8,8 +8,8 @@ export default function NavigationBar() {
         <Navbar.Brand href="#home">AiSpy</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
-          <a href="/login">Login</a>
-          <a href="/register">Register</a>
+          <a href="/auth">Login</a>
+          <a href="/auth">Register</a>
           {/* <Navbar.Text>
             Signed in as: <a href="#login">Mark Otto</a>
           </Navbar.Text> */}
