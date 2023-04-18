@@ -8,9 +8,11 @@ export default function NavigationBar() {
         <Navbar.Brand href="#home">AiSpy</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>
+          <a href="/login">Login</a>
+          <a href="/register">Register</a>
+          {/* <Navbar.Text>
             Signed in as: <a href="#login">Mark Otto</a>
-          </Navbar.Text>
+          </Navbar.Text> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>
