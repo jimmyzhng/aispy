@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
-const db = require('./queries');
+const db = require('./db/queries.js');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 3001;
