@@ -1,13 +1,18 @@
 const db = require('./connection.js');
 const bcrypt = require('bcrypt');
 
+function hashPassword(password) {
+  const saltRounds = 10;
+  const salt = bcrypt.genSaltSync(saltRounds);
+  const hash = bcrypt.hashSync(password, salt);
+  return hash;
+}
+
 const createUser = async (req, res) => {
   const { username, email, password } = req.body;
+  console.log(req.body);
 
-  // Hashed password for security
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  db.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *', [username, email, hashedPassword], (error, result) => {
+  db.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *', [username, email, hashPassword(password)], (error, result) => {
     if (error) {
       return console.log(error);
     }
@@ -26,18 +31,14 @@ const getUsers = (req, res) => {
   });
 };
 
-const getUser = (username) => {
-
-  db.query('SELECT * FROM users WHERE username = $1', [username], (error, result) => {
-    if (error) {
-      return console.log(error);
-    }
-    return result.rows[0];
-  });
+const getUserByUsername = (username) => {
+  return db.query('SELECT * FROM users WHERE username = $1', [username])
+    .then(res => res.rows[0])
+    .catch(err => console.log(err));
 };
 
 module.exports = {
   createUser,
   getUsers,
-  getUser
+  getUserByUsername
 };

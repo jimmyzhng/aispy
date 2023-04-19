@@ -29,7 +29,9 @@ export default function Auth() {
 
     axios
       .post("http://localhost:3001/api/login", { username, password })
-      .then((res) => console.log(res.data).catch((err) => console.log(err)));
+      .then((res) =>
+        console.log(res.data).catch((err) => console.log(err.response.data))
+      );
   };
 
   const handleSignUp = (e) => {
@@ -37,7 +39,9 @@ export default function Auth() {
 
     axios
       .post("http://localhost:3001/api/users", { email, username, password })
-      .then((res) => console.log(res.data).catch((err) => console.log(err)));
+      .then((res) =>
+        console.log(res.data).catch((err) => console.log(err.response.data))
+      );
   };
 
   return (

@@ -8,6 +8,7 @@ const port = 3001;
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 
 
 app.use(cors());
@@ -34,7 +35,7 @@ router.post('/login', async (req, res) => {
   console.log('req.body', req.body);
   const { username, password } = req.body;
 
-  const user = db.getUser(username);
+  const user = db.getUserByUsername(username);
   console.log('user', user);
 
   if (!user) {
@@ -44,7 +45,6 @@ router.post('/login', async (req, res) => {
 
     if (isPasswordCorrect) {
       res.cookie('userId', user.id);
-      res.redirect('/');
 
       res.status(200).send(`Hello, ${user.username}!`);
     } else {
