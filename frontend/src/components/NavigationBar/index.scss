@@ -1,0 +1,16 @@
+nav {
+  background-color: #231f20;
+}
+
+.nav-logo,
+.nav-link {
+  color: #00b188 !important;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.nav-logo {
+  font-size: 28px !important;
+}
