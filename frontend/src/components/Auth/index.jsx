@@ -26,6 +26,10 @@ export default function Auth() {
 
   const handleLogin = (e) => {
     e.preventDefault();
+
+    axios
+      .post("http://localhost:3001/login", { username, password })
+      .then((res) => console.log(res.data).catch((err) => console.log(err)));
   };
 
   const handleSignUp = (e) => {
