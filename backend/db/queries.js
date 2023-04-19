@@ -8,19 +8,6 @@ function hashPassword(password) {
   return hash;
 }
 
-const createUser = async (req, res) => {
-  const { username, email, password } = req.body;
-  console.log(req.body);
-
-  db.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *', [username, email, hashPassword(password)], (error, result) => {
-    if (error) {
-      return console.log(error);
-    }
-
-    res.status(201).send(`User added with ID: ${result.rows[0].id}`);
-  });
-};
-
 const getUsers = (req, res) => {
   db.query('SELECT * FROM users ORDER BY id ASC', (error, result) => {
     if (error) {
@@ -36,6 +23,21 @@ const getUserByUsername = (username) => {
     .then(res => res.rows[0])
     .catch(err => console.log(err));
 };
+
+const createUser = async (req, res) => {
+  const { username, email, password } = req.body;
+
+  db.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *', [username, email, hashPassword(password)], (error, result) => {
+    if (error) {
+      throw error;
+    }
+
+    res.status(201).send(`User added with ID: ${result.rows[0].id}`);
+  });
+};
+
+
+
 
 module.exports = {
   createUser,

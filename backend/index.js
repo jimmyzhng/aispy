@@ -32,26 +32,25 @@ router.post('/users', db.createUser);
 
 // User logging in and out
 router.post('/login', async (req, res) => {
-  console.log('req.body', req.body);
+  // console.log('req.body', req.body);
   const { username, password } = req.body;
-
-  const user = db.getUserByUsername(username);
-  console.log('user', user);
+  const user = await db.getUserByUsername(username);
 
   if (!user) {
-    res.status(401).send('Invalid email or password');
-  } else {
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
-
-    if (isPasswordCorrect) {
-      res.cookie('userId', user.id);
-
-      res.status(200).send(`Hello, ${user.username}!`);
-    } else {
-      res.status(401).send(`Invalid username or password.`);
-    }
+    return res.status(401).send('Invalid email or password');
   }
-});
+
+  const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+  if (isPasswordCorrect) {
+    res.cookie('userId', user.id);
+    res.status(200).send(`Hello, ${user.username}!`);
+    res.redirect('/');
+  } else {
+    res.status(401).send(`Invalid username or password.`);
+  }
+}
+);
 
 router.post('/logout', (req, res) => {
   res.clearCookie('userId');
