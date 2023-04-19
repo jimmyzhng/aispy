@@ -14,9 +14,9 @@ export default function NavigationBar() {
           <a href="/auth" className="nav-link">
             Login
           </a>
-          {/* <Navbar.Text>
-            Signed in as: <a href="#login">Mark Otto</a>
-          </Navbar.Text> */}
+          <Navbar.Text className="nav-link">
+            Signed in as: <a href="#login">User</a>
+          </Navbar.Text>
         </Navbar.Collapse>
       </Container>
     </Navbar>

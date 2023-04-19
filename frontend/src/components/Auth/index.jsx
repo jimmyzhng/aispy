@@ -1,12 +1,15 @@
 import { useState } from "react";
 import axios from "axios";
 import "./index.scss";
+import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
-  let [authMode, setAuthMode] = useState("login");
-  let [username, setUsername] = useState("");
-  let [email, setEmail] = useState("");
-  let [password, setPassword] = useState("");
+  const [authMode, setAuthMode] = useState("login");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const changeAuthMode = () => {
     setAuthMode(authMode === "login" ? "register" : "login");
@@ -29,7 +32,7 @@ export default function Auth() {
 
     axios
       .post("http://localhost:3001/api/login", { username, password })
-      .then((res) => console.log(res.data))
+      .then(() => navigate("/"))
       .catch((err) => console.log(err));
   };
 
