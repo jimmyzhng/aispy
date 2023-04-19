@@ -28,7 +28,7 @@ export default function Auth() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3001/login", { username, password })
+      .post("http://localhost:3001/api/login", { username, password })
       .then((res) => console.log(res.data).catch((err) => console.log(err)));
   };
 
@@ -36,7 +36,7 @@ export default function Auth() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3001/users", { email, username, password })
+      .post("http://localhost:3001/api/users", { email, username, password })
       .then((res) => console.log(res.data).catch((err) => console.log(err)));
   };
 

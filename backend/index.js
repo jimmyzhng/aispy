@@ -7,6 +7,7 @@ const app = express();
 const port = 3001;
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const router = express.Router();
 
 
 app.use(cors());
@@ -16,23 +17,25 @@ app.use(
     extended: true,
   })
 );
+app.use('/api/', router);
 app.use(cookieParser());
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   res.status(200).send('Hello!');
 });
 
-app.get('/users', db.getUsers);
+router.get('/users', db.getUsers);
 
 // User signing up
-app.post('/users', db.createUser);
+router.post('/users', db.createUser);
 
 // User logging in and out
-app.post('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
+  console.log('req.body', req.body);
   const { username, password } = req.body;
 
-  const result = db.getUser(username);
-  const user = result.rows[0];
+  const user = db.getUser(username);
+  console.log('user', user);
 
   if (!user) {
     res.status(401).send('Invalid email or password');
@@ -41,6 +44,7 @@ app.post('/login', async (req, res) => {
 
     if (isPasswordCorrect) {
       res.cookie('userId', user.id);
+      res.redirect('/');
 
       res.status(200).send(`Hello, ${user.username}!`);
     } else {
@@ -49,7 +53,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
-app.post('/logout', (req, res) => {
+router.post('/logout', (req, res) => {
   res.clearCookie('userId');
   res.status(200).send('Logged Out.');
 });
