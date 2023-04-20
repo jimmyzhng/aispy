@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import './App.css';
 import Auth from './components/Auth';
 import Home from './components/Home';
@@ -8,25 +7,12 @@ import { AuthProvider } from './context/AuthContext';
 
 
 function App() {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    async function fetchSession() {
-      const response = await fetch('http://localhost:3001/api/session', { credentials: 'include' });
-      const data = await response.json();
-      if (response.ok) {
-        setUser(data.user);
-      }
-    }
-
-    fetchSession();
-  }, []);
 
   return (
     <Router>
       <AuthProvider>
         <div className="App">
-          <NavigationBar user={user} />
+          <NavigationBar />
           <div className="content">
             <Routes>
               <Route path="/" element={<Home />} />

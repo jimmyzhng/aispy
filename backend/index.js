@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-
 const session = require('express-session');
 const express = require('express');
 const app = express();
@@ -10,6 +9,7 @@ const db = require('./db/queries.js');
 const bodyParser = require('body-parser');
 const port = 3001;
 const bcrypt = require('bcrypt');
+const helmet = require("helmet");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -18,16 +18,13 @@ app.use(
     extended: true,
   })
 );
+app.use(helmet());
+
 app.use(session({
   secret: process.env.SESSION_KEY,
   resave: false,
   saveUninitialized: true,
-  // cookie: {
-  //   httpOnly: true,
-  //   secure: true,
-  //   maxAge: 12345612356,
-  //   sameSite: 'none'
-  // }
+  cookie: { maxAge: parseInt(process.env.SESSION_MAX_AGE) }
 }));
 
 // Debugging
@@ -39,16 +36,15 @@ app.use((req, res, next) => {
 app.use('/api/', router);
 
 router.get('/', (req, res) => {
-  res.status(200).send('Hello!');
+  res.status(200).send('Hello :^)');
 });
 
 router.get('/users', db.getUsers);
 
 router.get('/session', (req, res) => {
-  // console.log('line 48 req.session', req.session);
-
+  console.log('req.session GET Session', req.session);
   if (req.session.user) {
-    res.json({ user: req.session.user });
+    res.json({ success: true, user: req.session.user });
   } else {
     res.status(401).send('Not logged in!');
   }
@@ -69,14 +65,12 @@ router.post('/login', async (req, res) => {
 
   const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
-  if (isPasswordCorrect) {
-
-    req.session.user = user;
-    console.log('req.session', req.session);
-    res.json({ success: true });
-  } else {
-    res.status(401).send(`Invalid username or password.`);
+  if (!isPasswordCorrect) {
+    return res.status(401).send(`Invalid username or password.`);
   }
+  req.session.user = user;
+  console.log('req.session after password check', req.session);
+  res.json({ success: true });
 }
 );
 

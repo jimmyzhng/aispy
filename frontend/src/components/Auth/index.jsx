@@ -37,6 +37,7 @@ export default function Auth() {
       .post("http://localhost:3001/api/login", { username, password })
       .then(() => {
         auth.setIsLoggedIn(true);
+        auth.setUser(username);
         navigate("/");
       })
       .catch((err) => console.log(err));

@@ -16,7 +16,7 @@ export default function NavigationBar() {
         <Navbar.Collapse className="justify-content-end">
           {auth.isLoggedIn ? (
             <Navbar.Text className="nav-link">
-              Signed in as: <a href="#login">Hello</a>
+              Signed in as: {auth.user}
             </Navbar.Text>
           ) : (
             <a href="/auth" className="nav-link">
