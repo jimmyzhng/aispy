@@ -2,12 +2,15 @@ import { useState } from "react";
 import axios from "axios";
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Auth() {
   const [authMode, setAuthMode] = useState("login");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const auth = useAuth();
 
   const navigate = useNavigate();
 
@@ -32,7 +35,10 @@ export default function Auth() {
 
     axios
       .post("http://localhost:3001/api/login", { username, password })
-      .then(() => navigate("/"))
+      .then(() => {
+        auth.setIsLoggedIn(true);
+        navigate("/");
+      })
       .catch((err) => console.log(err));
   };
 

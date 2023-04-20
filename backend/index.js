@@ -9,8 +9,6 @@ const cors = require('cors');
 const db = require('./db/queries.js');
 const bodyParser = require('body-parser');
 const port = 3001;
-
-// const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 
 app.use(cors());
@@ -20,17 +18,25 @@ app.use(
     extended: true,
   })
 );
-// app.use(cookieParser());
 app.use(session({
-  secret: '12345',
+  secret: process.env.SESSION_KEY,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: true,
+  // cookie: {
+  //   httpOnly: true,
+  //   secure: true,
+  //   maxAge: 12345612356,
+  //   sameSite: 'none'
+  // }
 }));
-app.use('/api/', router);
+
+// Debugging
 app.use((req, res, next) => {
   console.log('Session data:', req.session);
   next();
 });
+
+app.use('/api/', router);
 
 router.get('/', (req, res) => {
   res.status(200).send('Hello!');
@@ -38,12 +44,22 @@ router.get('/', (req, res) => {
 
 router.get('/users', db.getUsers);
 
+router.get('/session', (req, res) => {
+  // console.log('line 48 req.session', req.session);
+
+  if (req.session.user) {
+    res.json({ user: req.session.user });
+  } else {
+    res.status(401).send('Not logged in!');
+  }
+
+});
+
 // User signing up
 router.post('/users', db.createUser);
 
 // User logging in and out
 router.post('/login', async (req, res) => {
-  // console.log('req.body', req.body);
   const { username, password } = req.body;
   const user = await db.getUserByUsername(username);
 
@@ -54,8 +70,8 @@ router.post('/login', async (req, res) => {
   const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
   if (isPasswordCorrect) {
-    // res.cookie('userId', user.id);
-    req.session.userId = user.id;
+
+    req.session.user = user;
     console.log('req.session', req.session);
     res.json({ success: true });
   } else {
@@ -65,7 +81,7 @@ router.post('/login', async (req, res) => {
 );
 
 router.post('/logout', (req, res) => {
-  res.session = null;
+  req.session = null;
   res.status(200).send('Logged Out.');
 });
 

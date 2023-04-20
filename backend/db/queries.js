@@ -32,6 +32,8 @@ const createUser = async (req, res) => {
       throw error;
     }
 
+    req.session.user = req.body;
+
     res.status(201).send(`User added with ID: ${result.rows[0].id}`);
   });
 };

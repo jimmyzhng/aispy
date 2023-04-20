@@ -1,8 +1,11 @@
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import "./index.scss";
+import { useAuth } from "../../context/AuthContext";
 
 export default function NavigationBar() {
+  const auth = useAuth();
+
   return (
     <Navbar className="nav-bar">
       <Container>
@@ -11,12 +14,15 @@ export default function NavigationBar() {
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
-          <a href="/auth" className="nav-link">
-            Login
-          </a>
-          <Navbar.Text className="nav-link">
-            Signed in as: <a href="#login">User</a>
-          </Navbar.Text>
+          {auth.isLoggedIn ? (
+            <Navbar.Text className="nav-link">
+              Signed in as: <a href="#login">Hello</a>
+            </Navbar.Text>
+          ) : (
+            <a href="/auth" className="nav-link">
+              Login
+            </a>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
