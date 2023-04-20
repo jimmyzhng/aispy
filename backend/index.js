@@ -33,7 +33,7 @@ app.use(session({
 
 // Debugging
 app.use((req, res, next) => {
-  console.log('Session data:', req.session);
+  // console.log('Session data:', req.session);
   next();
 });
 
@@ -50,7 +50,6 @@ router.post('/users', db.createUser);
 
 // Check if logged in
 router.get('/login', (req, res) => {
-  // console.log('req.session GET Session', req.session);
   if (req.session.user) {
     res.send({ isLoggedIn: true, user: req.session.user });
   } else {
@@ -73,13 +72,19 @@ router.post('/login', async (req, res) => {
     return res.status(401).send(`Invalid username or password.`);
   }
   req.session.user = user;
-  res.json({ success: true });
+  res.send({ success: true });
 }
 );
 
 router.post('/logout', (req, res) => {
-  req.session.user = null;
-  res.status(200).send('Logged Out.');
+  req.session.destroy(err => {
+    if (err) {
+      return console.log(err);
+    }
+
+    res.clearCookie('connect.sid');
+    res.send({ message: "Logged out successfully." });
+  });
 });
 
 app.listen(port, () => {

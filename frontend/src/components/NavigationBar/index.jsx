@@ -4,9 +4,20 @@ import Nav from "react-bootstrap/Nav";
 import "./index.scss";
 import { useAuth } from "../../context/AuthContext";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import axios from "axios";
 
 export default function NavigationBar() {
   const auth = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await axios.post("http://localhost:3001/api/logout");
+      auth.setIsLoggedIn(false);
+      auth.setUser(null);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Navbar collapseOnSelect variant="dark" expand="lg" className="nav-bar">
@@ -46,7 +57,9 @@ export default function NavigationBar() {
                 title={`Signed in as: ${auth.user.username}`}
                 id="collasible-nav-dropdown"
               >
-                <NavDropdown.Item href="/">Logout</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleLogout}>
+                  Logout
+                </NavDropdown.Item>
               </NavDropdown>
             ) : (
               <Nav.Link href="/auth" className="nav-link">
