@@ -1,20 +1,19 @@
 nav {
-  background-color: #231f20;
-}
+  background-color: #022140;
+  .nav-logo,
+  .nav-link {
+    color: #fff !important;
 
-.nav-logo,
-.nav-link {
-  color: #00b188 !important;
-
-  &:hover {
-    opacity: 0.6;
+    &:hover {
+      opacity: 0.6;
+    }
   }
-}
 
-.nav-link {
-  padding: 10px !important;
-}
+  .nav-link {
+    padding: 10px !important;
+  }
 
-.nav-logo {
-  font-size: 28px !important;
+  .nav-logo {
+    font-size: 36px !important;
+  }
 }
