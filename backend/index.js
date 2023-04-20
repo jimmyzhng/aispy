@@ -11,8 +11,12 @@ const port = 3001;
 const bcrypt = require('bcrypt');
 const helmet = require("helmet");
 
-app.use(cors());
-app.use(bodyParser.json());
+app.use(cors({
+  origin: ["http://localhost:3000"],
+  methods: ["GET", "POST"],
+  credentials: true
+}));
+app.use(express.json());
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -41,18 +45,18 @@ router.get('/', (req, res) => {
 
 router.get('/users', db.getUsers);
 
-router.get('/session', (req, res) => {
-  console.log('req.session GET Session', req.session);
-  if (req.session.user) {
-    res.json({ success: true, user: req.session.user });
-  } else {
-    res.status(401).send('Not logged in!');
-  }
-
-});
-
 // User signing up
 router.post('/users', db.createUser);
+
+// Check if logged in
+router.get('/login', (req, res) => {
+  // console.log('req.session GET Session', req.session);
+  if (req.session.user) {
+    res.send({ isLoggedIn: true, user: req.session.user });
+  } else {
+    res.send({ isLoggedIn: false });
+  }
+});
 
 // User logging in and out
 router.post('/login', async (req, res) => {
@@ -69,13 +73,12 @@ router.post('/login', async (req, res) => {
     return res.status(401).send(`Invalid username or password.`);
   }
   req.session.user = user;
-  console.log('req.session after password check', req.session);
   res.json({ success: true });
 }
 );
 
 router.post('/logout', (req, res) => {
-  req.session = null;
+  req.session.user = null;
   res.status(200).send('Logged Out.');
 });
 

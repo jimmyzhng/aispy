@@ -22,26 +22,28 @@ export default function NavigationBar() {
               <>
                 <Nav.Link href="#features">Home</Nav.Link>
                 <NavDropdown title="Views" id="collasible-nav-dropdown">
-                  <NavDropdown.Item href="/">
+                  <NavDropdown.Item href="/view">
                     Building: North Exit
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/">
+                  <NavDropdown.Item href="/view">
                     Building: South Exit
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/">
+                  <NavDropdown.Item href="/view">
                     Building: West Exit
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="/">Past Broadcasts</NavDropdown.Item>
+                  <NavDropdown.Item href="/pastbroadcasts">
+                    Past Broadcasts
+                  </NavDropdown.Item>
                 </NavDropdown>
               </>
             )}
           </Nav>
 
           <Nav>
-            {auth.isLoggedIn ? (
+            {auth.isLoggedIn && auth.user ? (
               <NavDropdown
-                title={`Signed in as: ${auth.user}`}
+                title={`Signed in as: ${auth.user.username}`}
                 id="collasible-nav-dropdown"
               >
                 <NavDropdown.Item href="/">Logout</NavDropdown.Item>

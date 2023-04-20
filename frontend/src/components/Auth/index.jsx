@@ -4,6 +4,8 @@ import "./index.scss";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
+axios.defaults.withCredentials = true;
+
 export default function Auth() {
   const [authMode, setAuthMode] = useState("login");
   const [username, setUsername] = useState("");
@@ -37,7 +39,6 @@ export default function Auth() {
       .post("http://localhost:3001/api/login", { username, password })
       .then(() => {
         auth.setIsLoggedIn(true);
-        auth.setUser(username);
         navigate("/");
       })
       .catch((err) => console.log(err));
