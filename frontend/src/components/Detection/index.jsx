@@ -4,13 +4,14 @@ import { useEffect, useRef } from "react";
 import { drawRect } from "../../utils/tensorflow/utils";
 import ReactPlayer from "react-player";
 
+import "./index.scss";
+
 export default function Detection() {
   const canvasRef = useRef(null);
   const videoRef = useRef(null);
 
   const runCoco = async () => {
     const net = await cocoSsd.load();
-    console.log("hello");
 
     // Loop at rate of 10ms
     setInterval(() => {
@@ -26,11 +27,7 @@ export default function Detection() {
       const videoWidth = video.videoWidth;
       const videoHeight = video.videoHeight;
 
-      // // Set video width
-      // videoRef.current.video.width = videoWidth;
-      // videoRef.current.video.height = videoHeight;
-
-      // Set canvas height and width
+      // // Set canvas height and width
       canvasRef.current.width = videoWidth;
       canvasRef.current.height = videoHeight;
 
@@ -50,37 +47,16 @@ export default function Detection() {
   }, []);
 
   return (
-    <div>
+    <div className="detection-cont">
       <ReactPlayer
         ref={videoRef}
         url="testvideo.mp4"
         playing
         muted
         loop
-        style={{
-          position: "absolute",
-          marginLeft: "auto",
-          marginRight: "auto",
-          left: 0,
-          right: 0,
-          textAlign: "center",
-          zindex: 5,
-        }}
+        className="video"
       />
-      <canvas
-        ref={canvasRef}
-        style={{
-          position: "absolute",
-          marginLeft: "auto",
-          marginRight: "auto",
-          left: 0,
-          right: 0,
-          textAlign: "center",
-          zindex: 8,
-          width: 640,
-          height: 360,
-        }}
-      />
+      <canvas ref={canvasRef} className="detection" />
     </div>
   );
 }
