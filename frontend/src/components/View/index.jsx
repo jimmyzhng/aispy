@@ -1,4 +1,6 @@
 import ReactPlayer from "react-player";
+import Detection from "../Detection";
+import "./index.scss";
 
 export default function View() {
   return (
@@ -6,7 +8,7 @@ export default function View() {
       <h1>View</h1>
 
       <div className="view-content">
-        <ReactPlayer url="../../../public/videos/test_video.mp4" />
+        <Detection />
       </div>
     </div>
   );

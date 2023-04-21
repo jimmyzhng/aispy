@@ -1,3 +1,5 @@
+@import "animate.css";
+
 .hero {
   width: 100%;
   display: flex;
@@ -12,6 +14,7 @@
     display: flex;
     justify-content: center;
     text-align: center;
+    animation: fadeIn 2.5s;
   }
 
   .home-subheader {
@@ -21,6 +24,7 @@
     justify-content: center;
     text-align: center;
     margin-top: 20px;
+    animation: fadeIn 3.5s;
   }
 
   .sign-up {
@@ -30,7 +34,7 @@
     border-radius: 25px;
     padding: 15px;
     margin-top: 20px;
-
+    animation: fadeIn 4s;
     &:hover {
       opacity: 0.75;
     }

@@ -1,5 +1,5 @@
 import './App.css';
-import Auth from './Auth';
+import Auth from './components/Auth';
 import Home from './components/Home';
 import NavigationBar from './components/NavigationBar';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
