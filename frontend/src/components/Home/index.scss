@@ -1,0 +1,38 @@
+.hero {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+
+  .home-header {
+    font-size: clamp(8px, 4px + 12vw, 120px);
+    max-width: 70vw;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .home-subheader {
+    font-size: clamp(2px, 1px + 3vw, 30px);
+    color: #ffffffa4;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .sign-up {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    padding: 15px;
+    margin-top: 20px;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}

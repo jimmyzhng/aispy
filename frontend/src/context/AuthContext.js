@@ -10,12 +10,10 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
-  console.log('Isloggedin?', isLoggedIn);
 
   useEffect(() => {
     axios.get('http://localhost:3001/api/login')
       .then(res => {
-        console.log('res.data.user', res.data.user);
         setIsLoggedIn(res.data.isLoggedIn);
         setUser(res.data.user);
       })

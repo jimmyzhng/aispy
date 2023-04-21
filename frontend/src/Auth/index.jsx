@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 axios.defaults.withCredentials = true;
 

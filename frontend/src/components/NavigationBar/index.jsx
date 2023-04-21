@@ -31,7 +31,7 @@ export default function NavigationBar() {
           <Nav className="me-auto">
             {auth.user && (
               <>
-                <Nav.Link href="#features">Home</Nav.Link>
+                <Nav.Link href="/">Home</Nav.Link>
                 <NavDropdown title="Views" id="collasible-nav-dropdown">
                   <NavDropdown.Item href="/view">
                     Building: North Exit
