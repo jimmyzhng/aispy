@@ -12,7 +12,10 @@ export default function View() {
 
       <div className="view-cont">
         <Detection view={id} />
-        <InfoBox view={id} />
+
+        <div className="view-info-cont">
+          <InfoBox view={id} />
+        </div>
       </div>
     </div>
   );
