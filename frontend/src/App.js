@@ -19,8 +19,9 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/auth" element={<Auth />} />
-              <Route path="/view" element={<View />} />
+              <Route path="/view/:id" element={<View />} />
               <Route path="/pastbroadcasts" element={<PastBroadcast />} />
+
             </Routes>
           </div>
         </div>

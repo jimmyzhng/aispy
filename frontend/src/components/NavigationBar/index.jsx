@@ -33,13 +33,13 @@ export default function NavigationBar() {
               <>
                 <Nav.Link href="/">Home</Nav.Link>
                 <NavDropdown title="Views" id="collasible-nav-dropdown">
-                  <NavDropdown.Item href="/view">
+                  <NavDropdown.Item href="/view/north">
                     Building: North Exit
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/view">
+                  <NavDropdown.Item href="/view/south">
                     Building: South Exit
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/view">
+                  <NavDropdown.Item href="/view/west">
                     Building: West Exit
                   </NavDropdown.Item>
                   <NavDropdown.Divider />

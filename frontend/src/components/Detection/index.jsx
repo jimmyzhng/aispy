@@ -6,7 +6,7 @@ import ReactPlayer from "react-player";
 
 import "./index.scss";
 
-export default function Detection() {
+export default function Detection({ view }) {
   const canvasRef = useRef(null);
   const videoRef = useRef(null);
 
@@ -21,7 +21,12 @@ export default function Detection() {
 
   const detect = async (net) => {
     // Check data is available
-    if (typeof videoRef.current !== "undefined" && videoRef.current !== null) {
+    if (
+      typeof videoRef.current !== "undefined" &&
+      videoRef.current !== null &&
+      videoRef.current.getInternalPlayer().videoWidth > 0 &&
+      videoRef.current.getInternalPlayer().videoHeight > 0
+    ) {
       // Get Video Properties
       const video = videoRef.current.getInternalPlayer();
       const videoWidth = video.videoWidth;
@@ -50,9 +55,9 @@ export default function Detection() {
     <div className="detection-cont">
       <ReactPlayer
         ref={videoRef}
-        url="testvideo.mp4"
-        playing
+        url={`${process.env.PUBLIC_URL}/view/${view}.mp4`}
         muted
+        playing
         loop
         className="video"
       />

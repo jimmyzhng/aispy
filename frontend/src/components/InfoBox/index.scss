@@ -1,3 +1,19 @@
-.infobox-title {
-  color: red;
+.infobox-cont {
+  border: 2px solid #fff;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  max-width: 50vw;
+  max-height: 10vh;
+  flex-direction: column;
+  padding: 20px;
+
+  .infobox-title {
+    color: #fff;
+    font-size: 24px;
+  }
+  .infobox-desc {
+    color: red;
+    font-size: 18px;
+  }
 }
