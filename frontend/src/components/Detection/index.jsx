@@ -5,10 +5,13 @@ import { drawRect } from "../../utils/tensorflow/utils";
 import ReactPlayer from "react-player";
 
 import "./index.scss";
+import { useVideo } from "../../context/VideoContext";
 
 export default function Detection({ view }) {
   const canvasRef = useRef(null);
   const videoRef = useRef(null);
+
+  const videoContext = useVideo();
 
   const runCoco = async () => {
     const net = await cocoSsd.load();
@@ -37,7 +40,9 @@ export default function Detection({ view }) {
       canvasRef.current.height = videoHeight;
 
       const obj = await net.detect(video);
-      console.log(obj);
+      // console.log('obj', obj);
+      videoContext.setDetections(obj);
+      console.log("video.detections", videoContext.detections);
 
       const ctx = canvasRef.current.getContext("2d");
 

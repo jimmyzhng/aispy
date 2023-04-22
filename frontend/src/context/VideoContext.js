@@ -10,7 +10,7 @@ export function VideoProvider({ children }) {
   const [playing, setPlaying] = useState(false);
   const [detections, setDetections] = useState([]);
   return (
-    <VideoContext.Provider value={{ playing, setPlaying }}>
+    <VideoContext.Provider value={{ playing, setPlaying, detections, setDetections }}>
       {children}
     </VideoContext.Provider>
   );
