@@ -8,7 +8,7 @@ export const drawRect = (detections, ctx) => {
     const color = 'red';
     ctx.strokeStyle = color;
     ctx.lineWidth = 5;
-    ctx.font = '35px Arial';
+    ctx.font = '30px Arial';
     ctx.fillStyle = color;
 
     // Draw Rectangles and text

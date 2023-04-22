@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import View from './components/View';
 import PastBroadcast from './components/PastBroadcast';
+import { VideoProvider } from './context/VideoContext';
 
 
 function App() {
@@ -13,18 +14,19 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <div className="App">
-          <NavigationBar />
-          <div className="content">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/auth" element={<Auth />} />
-              <Route path="/view/:id" element={<View />} />
-              <Route path="/pastbroadcasts" element={<PastBroadcast />} />
-
-            </Routes>
+        <VideoProvider>
+          <div className="App">
+            <NavigationBar />
+            <div className="content">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/auth" element={<Auth />} />
+                <Route path="/view/:id" element={<View />} />
+                <Route path="/pastbroadcasts" element={<PastBroadcast />} />
+              </Routes>
+            </div>
           </div>
-        </div>
+        </VideoProvider>
       </AuthProvider>
     </Router>
   );
