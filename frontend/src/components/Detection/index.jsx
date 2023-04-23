@@ -3,6 +3,7 @@ import * as tf from "@tensorflow/tfjs";
 import { useEffect, useRef } from "react";
 import { drawRect } from "../../utils/tensorflow/utils";
 import ReactPlayer from "react-player";
+import Spinner from "react-bootstrap/Spinner";
 
 import "./index.scss";
 import { useVideo } from "../../context/VideoContext";
@@ -11,7 +12,8 @@ export default function Detection({ view }) {
   const canvasRef = useRef(null);
   const videoRef = useRef(null);
 
-  const videoContext = useVideo();
+  const { setPlaying, playing, setDetections, canvasReady, setCanvasReady } =
+    useVideo();
 
   const runCoco = async () => {
     const net = await cocoSsd.load();
@@ -41,8 +43,7 @@ export default function Detection({ view }) {
 
       const obj = await net.detect(video);
       // console.log('obj', obj);
-      videoContext.setDetections(obj);
-      console.log("video.detections", videoContext.detections);
+      setDetections(obj);
 
       const ctx = canvasRef.current.getContext("2d");
 
@@ -58,13 +59,15 @@ export default function Detection({ view }) {
 
   return (
     <div className="detection-cont">
+      {!playing && <Spinner />}
+
       <ReactPlayer
         ref={videoRef}
         url={`${process.env.PUBLIC_URL}/view/${view}.mp4`}
-        muted
         playing
         loop
         className="video"
+        onReady={() => setPlaying(true)}
       />
       <canvas ref={canvasRef} className="detection" />
     </div>

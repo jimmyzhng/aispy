@@ -3,6 +3,9 @@
   height: 360px;
   position: relative;
   margin: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .video {
     width: 100%;

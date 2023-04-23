@@ -9,6 +9,8 @@ export function useVideo() {
 export function VideoProvider({ children }) {
   const [playing, setPlaying] = useState(false);
   const [detections, setDetections] = useState([]);
+  // console.log('playing: ', playing);
+
   return (
     <VideoContext.Provider value={{ playing, setPlaying, detections, setDetections }}>
       {children}

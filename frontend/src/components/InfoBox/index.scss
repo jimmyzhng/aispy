@@ -15,5 +15,10 @@
   .infobox-desc {
     color: red;
     font-size: 18px;
+
+    .infobox-movement,
+    .infobox-audio {
+      color: green;
+    }
   }
 }

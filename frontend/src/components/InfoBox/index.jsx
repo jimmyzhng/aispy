@@ -4,6 +4,8 @@ import capitalizeFirstLetter from "../../helpers/capitalizeFirstLetter";
 import { HiOutlineStatusOffline } from "react-icons/hi";
 
 import { useVideo } from "../../context/VideoContext";
+import { AiFillAudio } from "react-icons/ai";
+import { BsPersonFillExclamation } from "react-icons/bs";
 
 export default function InfoBox({ view }) {
   const video = useVideo();
@@ -25,7 +27,16 @@ export default function InfoBox({ view }) {
           </>
         )}
 
-        <div>Person spotted</div>
+        <div className="infobox-activity">
+          <div className="infobox-movement">
+            <BsPersonFillExclamation />{" "}
+            {video.playing ? "Movement Detected" : "No Activity"}
+          </div>
+
+          <div className="infobox-audio">
+            <AiFillAudio /> {video.playing ? "Audio Detected" : "No Activity"}
+          </div>
+        </div>
       </div>
     </div>
   );
