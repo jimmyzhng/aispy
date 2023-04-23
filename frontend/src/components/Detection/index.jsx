@@ -18,10 +18,10 @@ export default function Detection({ view }) {
   const runCoco = async () => {
     const net = await cocoSsd.load();
 
-    // Loop at rate of 10ms
+    // Loop at rate of 100ms
     setInterval(() => {
       detect(net);
-    }, 10);
+    }, 50);
   };
 
   const detect = async (net) => {
