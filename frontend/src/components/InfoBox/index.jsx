@@ -6,9 +6,10 @@ import { HiOutlineStatusOffline } from "react-icons/hi";
 import { useVideo } from "../../context/VideoContext";
 import { AiFillAudio } from "react-icons/ai";
 import { BsPersonFillExclamation } from "react-icons/bs";
+import personCount from "../../helpers/personCount";
 
 export default function InfoBox({ view }) {
-  const video = useVideo();
+  const { playing, detections } = useVideo();
 
   return (
     <div className="infobox-cont">
@@ -17,7 +18,7 @@ export default function InfoBox({ view }) {
       )} Exit`}</div>
 
       <div className="infobox-desc">
-        {video.playing ? (
+        {playing ? (
           <>
             <BsFillRecordFill /> Live
           </>
@@ -30,11 +31,12 @@ export default function InfoBox({ view }) {
         <div className="infobox-activity">
           <div className="infobox-movement">
             <BsPersonFillExclamation />{" "}
-            {video.playing ? "Movement Detected" : "No Activity"}
+            {personCount(detections) ? "Movement Detected" : "No Activity"}
           </div>
 
           <div className="infobox-audio">
-            <AiFillAudio /> {video.playing ? "Audio Detected" : "No Activity"}
+            <AiFillAudio />{" "}
+            {personCount(detections) ? "Audio Detected" : "No Activity"}
           </div>
         </div>
       </div>

@@ -44,7 +44,7 @@ export default function RealtimeChart() {
     },
     title: {
       text: "People Spotted",
-      align: "left",
+      align: "center",
     },
     markers: {
       size: 0,
@@ -68,7 +68,7 @@ export default function RealtimeChart() {
       dataStream.reverse().pop();
       dataStream.reverse();
     }
-    setDataStream((prev) => [...prev, { x: previous.x + 3, y: dataPoint }]);
+    setDataStream((prev) => [...prev, { x: previous.x + 0.1, y: dataPoint }]);
   };
 
   useEffect(() => {
