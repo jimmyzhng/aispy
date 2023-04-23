@@ -64,8 +64,8 @@ export default function Detection({ view }) {
       <ReactPlayer
         ref={videoRef}
         url={`${process.env.PUBLIC_URL}/view/${view}.mp4`}
-        playing
         loop
+        playing
         className="video"
         onReady={() => setPlaying(true)}
       />

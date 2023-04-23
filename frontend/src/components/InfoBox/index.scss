@@ -1,10 +1,10 @@
 .infobox-cont {
-  border: 2px solid #fff;
+  border: 3px solid #fff;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   max-width: 50vw;
-  max-height: 10vh;
+  max-height: 40vh;
   flex-direction: column;
   padding: 20px;
 
@@ -13,8 +13,12 @@
     font-size: 24px;
   }
   .infobox-desc {
-    color: red;
+    color: #fff;
     font-size: 18px;
+
+    .infobox-live {
+      color: red;
+    }
 
     .infobox-movement,
     .infobox-audio {

@@ -20,7 +20,7 @@ export default function RealtimeChart() {
   const options = {
     chart: {
       id: "realtime",
-      height: 350,
+      height: 250,
       type: "line",
       animations: {
         enabled: true,
@@ -41,24 +41,43 @@ export default function RealtimeChart() {
     },
     stroke: {
       curve: "smooth",
-    },
-    title: {
-      text: "People Spotted",
-      align: "center",
+      width: 4,
     },
     markers: {
       size: 0,
     },
     xaxis: {
       type: "numeric",
+      labels: {
+        style: { colors: "#fff" },
+      },
+      group: {
+        colors: ["#fff"],
+      },
+      axisTicks: {
+        color: "#fff",
+      },
+      axisBorder: {
+        color: "#fff",
+      },
     },
     yaxis: {
       min: 0,
       max: 10,
+      labels: {
+        style: { colors: "#fff" },
+      },
+      axisTicks: {
+        color: "#fff",
+      },
+      axisBorder: {
+        color: "#fff",
+      },
     },
     legend: {
       show: false,
     },
+    colors: ["#fff"],
   };
 
   const appendData = async (dataPoint) => {
@@ -68,7 +87,7 @@ export default function RealtimeChart() {
       dataStream.reverse().pop();
       dataStream.reverse();
     }
-    setDataStream((prev) => [...prev, { x: previous.x + 0.1, y: dataPoint }]);
+    setDataStream((prev) => [...prev, { x: previous.x + 0.05, y: dataPoint }]);
   };
 
   useEffect(() => {
@@ -82,7 +101,7 @@ export default function RealtimeChart() {
         options={options}
         series={series}
         type="line"
-        height={350}
+        height={250}
       />
     </div>
   );
