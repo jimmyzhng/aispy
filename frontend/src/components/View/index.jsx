@@ -14,7 +14,6 @@ export default function View() {
 
         <div className="view-info-cont">
           <InfoBox view={id} />
-          {/* <RealtimeChart /> */}
         </div>
       </div>
     </div>
