@@ -11,11 +11,16 @@ import RealtimeChart from "../RealtimeChart";
 import classNames from "classnames";
 
 export default function InfoBox({ view }) {
-  const { playing, detections } = useVideo();
+  const { playing, detections, soundDetections } = useVideo();
 
-  const detectionClass = classNames({
+  const movementDetectionClass = classNames({
     "infobox-detections": true,
     active: personCount(detections),
+  });
+
+  const soundDetectionClass = classNames({
+    "infobox-detections": true,
+    active: soundDetections,
   });
 
   return (
@@ -38,14 +43,13 @@ export default function InfoBox({ view }) {
         </div>
 
         <div className="infobox-activity">
-          <div className={detectionClass}>
+          <div className={movementDetectionClass}>
             <BsPersonFillExclamation />{" "}
             {personCount(detections) ? `Movement Detected` : "No Activity"}
           </div>
 
-          <div className={detectionClass}>
-            <AiFillAudio />{" "}
-            {personCount(detections) ? "Audio Detected" : "No Activity"}
+          <div className={soundDetectionClass}>
+            <AiFillAudio /> {soundDetections ? "Audio Detected" : "No Activity"}
           </div>
         </div>
         <div className="infobox-chart">

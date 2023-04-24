@@ -22,7 +22,7 @@ export default function Detection({ view }) {
   const analyserRef = useRef(null);
   const soundData = useRef(new Uint8Array(2048));
 
-  const { setPlaying, playing, setDetections } = useVideo();
+  const { setPlaying, playing, setDetections, setSoundDetections } = useVideo();
 
   const runCoco = async () => {
     const net = await cocoSsd.load();
@@ -84,7 +84,8 @@ export default function Detection({ view }) {
         requestAnimationFrame(soundCheckLoop);
         analyser.getByteFrequencyData(soundData.current);
         const soundPlaying = soundData.current.some((val) => val > 0);
-        console.log("is sound playing:", soundPlaying);
+
+        setSoundDetections(soundPlaying);
       };
       soundCheckLoop();
 
