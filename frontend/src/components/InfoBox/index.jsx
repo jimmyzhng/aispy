@@ -40,7 +40,7 @@ export default function InfoBox({ view }) {
         <div className="infobox-activity">
           <div className={detectionClass}>
             <BsPersonFillExclamation />{" "}
-            {personCount(detections) ? "Movement Detected" : "No Activity"}
+            {personCount(detections) ? `Movement Detected` : "No Activity"}
           </div>
 
           <div className={detectionClass}>
@@ -49,7 +49,7 @@ export default function InfoBox({ view }) {
           </div>
         </div>
         <div className="infobox-chart">
-          {/* <div> People Detected </div> */}
+          <div className="infobox-chart-title"> People Detected </div>
           <RealtimeChart />
         </div>
       </div>

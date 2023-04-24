@@ -63,7 +63,7 @@ export default function RealtimeChart() {
     },
     yaxis: {
       min: 0,
-      max: 5,
+      max: 10,
       labels: {
         style: { colors: "#fff" },
       },

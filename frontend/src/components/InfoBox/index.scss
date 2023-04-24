@@ -25,5 +25,14 @@
     .active {
       color: green;
     }
+
+    .infobox-chart {
+      padding-top: 20px;
+
+      .infobox-chart-title {
+        display: flex;
+        justify-content: center;
+      }
+    }
   }
 }

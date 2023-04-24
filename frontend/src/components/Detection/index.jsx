@@ -11,9 +11,18 @@ import { useVideo } from "../../context/VideoContext";
 export default function Detection({ view }) {
   const canvasRef = useRef(null);
   const videoRef = useRef(null);
+  const videoPlayer = videoRef.current
+    ? videoRef.current.getInternalPlayer
+      ? videoRef.current.getInternalPlayer()
+      : videoRef.current
+    : null;
 
-  const { setPlaying, playing, setDetections, canvasReady, setCanvasReady } =
-    useVideo();
+  // Sound
+  const audioContextRef = useRef(null);
+  const analyserRef = useRef(null);
+  const soundData = useRef(new Uint8Array(2048));
+
+  const { setPlaying, playing, setDetections } = useVideo();
 
   const runCoco = async () => {
     const net = await cocoSsd.load();
@@ -29,11 +38,11 @@ export default function Detection({ view }) {
     if (
       typeof videoRef.current !== "undefined" &&
       videoRef.current !== null &&
-      videoRef.current.getInternalPlayer().videoWidth > 0 &&
-      videoRef.current.getInternalPlayer().videoHeight > 0
+      videoPlayer.videoWidth > 0 &&
+      videoPlayer.videoHeight > 0
     ) {
       // Get Video Properties
-      const video = videoRef.current.getInternalPlayer();
+      const video = videoPlayer;
       const videoWidth = video.videoWidth;
       const videoHeight = video.videoHeight;
 
@@ -55,7 +64,35 @@ export default function Detection({ view }) {
 
   useEffect(() => {
     runCoco();
-  }, []);
+
+    if (videoPlayer) {
+      // Create AudioContext
+      const audioContext = new AudioContext();
+      audioContextRef.current = audioContext;
+
+      // Create analyser node (expresses audio time & frequency data)
+      const analyser = new AnalyserNode(audioContext, { fftSize: 2048 });
+      analyserRef.current = analyser;
+
+      // Connect analyser to audio source
+      const source = audioContext.createMediaElementSource(videoPlayer);
+      source.connect(analyser);
+      analyser.connect(audioContext.destination);
+
+      // Set loop to check for sound
+      const soundCheckLoop = () => {
+        requestAnimationFrame(soundCheckLoop);
+        analyser.getByteFrequencyData(soundData.current);
+        const soundPlaying = soundData.current.some((val) => val > 0);
+        console.log("is sound playing:", soundPlaying);
+      };
+      soundCheckLoop();
+
+      return () => {
+        audioContext.close();
+      };
+    }
+  }, [playing]);
 
   return (
     <div className="detection-cont">
