@@ -8,9 +8,15 @@ import { AiFillAudio } from "react-icons/ai";
 import { BsPersonFillExclamation } from "react-icons/bs";
 import personCount from "../../helpers/personCount";
 import RealtimeChart from "../RealtimeChart";
+import classNames from "classnames";
 
 export default function InfoBox({ view }) {
   const { playing, detections } = useVideo();
+
+  const detectionClass = classNames({
+    "infobox-detections": true,
+    active: personCount(detections),
+  });
 
   return (
     <div className="infobox-cont">
@@ -32,18 +38,18 @@ export default function InfoBox({ view }) {
         </div>
 
         <div className="infobox-activity">
-          <div className="infobox-movement">
+          <div className={detectionClass}>
             <BsPersonFillExclamation />{" "}
             {personCount(detections) ? "Movement Detected" : "No Activity"}
           </div>
 
-          <div className="infobox-audio">
+          <div className={detectionClass}>
             <AiFillAudio />{" "}
             {personCount(detections) ? "Audio Detected" : "No Activity"}
           </div>
         </div>
         <div className="infobox-chart">
-          <div> People Detected </div>
+          {/* <div> People Detected </div> */}
           <RealtimeChart />
         </div>
       </div>

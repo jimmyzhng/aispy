@@ -81,18 +81,20 @@ export default function RealtimeChart() {
   };
 
   const appendData = async (dataPoint) => {
-    let previous = dataStream[dataStream.length - 1];
+    let lastDataPoint = dataStream[dataStream.length - 1];
     // Preventing memory issues
     if (dataStream.length > 1000) {
       dataStream.reverse().pop();
       dataStream.reverse();
     }
-    setDataStream((prev) => [...prev, { x: previous.x + 0.05, y: dataPoint }]);
+    setDataStream((prev) => [
+      ...prev,
+      { x: lastDataPoint.x + 0.05, y: dataPoint },
+    ]);
   };
 
   useEffect(() => {
     appendData(personCount(detections));
-    console.log("pc det", personCount(detections));
     ApexChart.exec("realtime", "updateSeries", [{ data: dataStream }]);
   }, [detections]);
   return (
