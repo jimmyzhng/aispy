@@ -67,7 +67,7 @@ export default function InfoBox({ view }) {
           </div>
         </div>
         <div className="infobox-chart">
-          <div className="infobox-chart-title"> People Detected </div>
+          <div className="infobox-chart-title"> Detections (people) </div>
           <RealtimeChart />
         </div>
       </div>

@@ -1,9 +1,8 @@
-import * as cocoSsd from "@tensorflow-models/coco-ssd";
 import * as tf from "@tensorflow/tfjs";
 import { useEffect, useRef } from "react";
-import { drawRect } from "../../utils/tensorflow/utils";
 import ReactPlayer from "react-player";
 import Spinner from "react-bootstrap/Spinner";
+import { runCoco } from "../../helpers/detectionHelpers";
 
 import "./index.scss";
 import { useVideo } from "../../context/VideoContext";
@@ -25,48 +24,10 @@ export default function Detection({ view }) {
   const { setPlaying, playing, setDetections, setSoundDetections, muted } =
     useVideo();
 
-  const runCoco = async () => {
-    const net = await cocoSsd.load();
-
-    // Loop at rate of 100ms
-    setInterval(() => {
-      detect(net);
-    }, 50);
-  };
-
-  const detect = async (net) => {
-    // Check data is available
-    if (
-      typeof videoRef.current !== "undefined" &&
-      videoRef.current !== null &&
-      videoPlayer.videoWidth > 0 &&
-      videoPlayer.videoHeight > 0
-    ) {
-      // Get Video Properties
-      const video = videoPlayer;
-      const videoWidth = video.videoWidth;
-      const videoHeight = video.videoHeight;
-
-      // // Set canvas height and width
-      canvasRef.current.width = videoWidth;
-      canvasRef.current.height = videoHeight;
-
-      const obj = await net.detect(video);
-      // console.log('obj', obj);
-      setDetections(obj);
-
-      const ctx = canvasRef.current.getContext("2d");
-
-      drawRect(obj, ctx);
-    } else {
-      console.log("Not working");
-    }
-  };
-
   useEffect(() => {
-    runCoco();
-
     if (videoPlayer) {
+      runCoco(videoRef, videoPlayer, canvasRef, setDetections);
+
       // Create AudioContext
       const audioContext = new AudioContext();
       audioContextRef.current = audioContext;
