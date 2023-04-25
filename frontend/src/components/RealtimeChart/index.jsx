@@ -4,28 +4,29 @@ import { useVideo } from "../../context/VideoContext";
 import ApexChart from "apexcharts";
 import personCount from "../../helpers/personCount";
 import { series, options } from "../../utils/chartOptions";
+import { useRef } from "react";
+import { useChart } from "../../context/ChartContext";
+
+const appendData = (dataStream, dataPoint) => {
+  let lastDataPoint = dataStream[dataStream.length - 1];
+  // Preventing memory issues - removes oldest values
+  if (dataStream.length > 1000) {
+    dataStream.slice(-1000);
+  }
+  return [...dataStream, { x: lastDataPoint.x + 0.05, y: dataPoint }];
+};
 
 export default function RealtimeChart() {
-  const [dataStream, setDataStream] = useState([{ x: 0, y: 0 }]);
+  const { dataStream, setDataStream } = useChart();
   const { detections } = useVideo();
 
-  const appendData = async (dataPoint) => {
-    let lastDataPoint = dataStream[dataStream.length - 1];
-    // Preventing memory issues
-    if (dataStream.length > 1000) {
-      dataStream.reverse().pop();
-      dataStream.reverse();
-    }
-    setDataStream((prev) => [
-      ...prev,
-      { x: lastDataPoint.x + 0.05, y: dataPoint },
-    ]);
-  };
-
   useEffect(() => {
-    appendData(personCount(detections));
-    ApexChart.exec("realtime", "updateSeries", [{ data: dataStream }]);
+    const newDataStream = appendData(dataStream, personCount(detections));
+
+    setDataStream(newDataStream);
+    ApexChart.exec("realtime", "updateSeries", [{ data: newDataStream }]);
   }, [detections]);
+
   return (
     <div className="realtime-chart-cont">
       <ReactApexChart
