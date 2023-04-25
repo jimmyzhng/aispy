@@ -22,7 +22,8 @@ export default function Detection({ view }) {
   const analyserRef = useRef(null);
   const soundData = useRef(new Uint8Array(2048));
 
-  const { setPlaying, playing, setDetections, setSoundDetections } = useVideo();
+  const { setPlaying, playing, setDetections, setSoundDetections, muted } =
+    useVideo();
 
   const runCoco = async () => {
     const net = await cocoSsd.load();
@@ -104,6 +105,7 @@ export default function Detection({ view }) {
         url={`${process.env.PUBLIC_URL}/view/${view}.mp4`}
         loop
         playing
+        muted={muted}
         className="video"
         onReady={() => setPlaying(true)}
       />

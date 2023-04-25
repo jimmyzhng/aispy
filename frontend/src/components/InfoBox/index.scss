@@ -5,7 +5,27 @@
   justify-content: center;
   width: 640px;
   flex-direction: column;
-  padding: 20px;
+  padding: 15px;
+  position: relative;
+
+  .infobox-audio {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.75;
+    }
+  }
+
+  .unmute {
+    color: #fff;
+  }
+
+  .mute {
+    color: red;
+  }
 
   .infobox-title {
     color: #fff;
@@ -27,7 +47,7 @@
     }
 
     .infobox-chart {
-      padding-top: 20px;
+      padding-top: 15px;
 
       .infobox-chart-title {
         display: flex;
