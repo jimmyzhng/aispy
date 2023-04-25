@@ -1,9 +1,13 @@
-export const series = [
-  {
-    name: "People Spotted",
-    data: dataStream,
-  },
-];
+
+
+export const series = (data) => {
+  return [
+    {
+      name: "People Spotted",
+      data: data,
+    },
+  ];
+};
 
 export const options = {
   chart: {

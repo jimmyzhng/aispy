@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { useVideo } from "../../context/VideoContext";
-import Chart from "react-apexcharts";
 import ApexChart from "apexcharts";
 import personCount from "../../helpers/personCount";
 import { series, options } from "../../utils/chartOptions";
@@ -31,7 +30,7 @@ export default function RealtimeChart() {
     <div className="realtime-chart-cont">
       <ReactApexChart
         options={options}
-        series={series}
+        series={series(dataStream)}
         type="line"
         height={200}
       />
