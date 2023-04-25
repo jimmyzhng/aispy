@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "db:reset": "node bin/resetdb.js"
+    "db:reset": "dropdb aispy && createdb aispy && psql -d aispy -f schema.sql && psql -d aispy -f seed.sql"
   },
   "keywords": [],
   "author": "",

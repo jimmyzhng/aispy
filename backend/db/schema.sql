@@ -10,7 +10,7 @@
   );
 
   CREATE TABLE videos (
-    id INT PRIMARY KEY NOT NULL,
+    id SERIAL PRIMARY KEY NOT NULL,
     url VARCHAR(255),
     date DATE,
     building VARCHAR(255),

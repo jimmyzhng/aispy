@@ -1,5 +1,3 @@
-import { useRef } from "react";
-
 export const detectAudio = (audioContextRef, analyserRef, soundData, setSoundDetections, videoPlayer) => {
 
   // Create AudioContext
