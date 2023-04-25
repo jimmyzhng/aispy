@@ -38,7 +38,14 @@ const createUser = async (req, res) => {
   });
 };
 
+const getVideos = (req, res) => {
+  db.query('SELECT * FROM videos ORDER by id ASC', (error, result) => {
+    if (err) {
+      throw error;
+    }
 
+  });
+};
 
 
 module.exports = {
