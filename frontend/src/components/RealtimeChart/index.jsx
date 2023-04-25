@@ -6,15 +6,7 @@ import personCount from "../../helpers/personCount";
 import { series, options } from "../../utils/chartOptions";
 import { useRef } from "react";
 import { useChart } from "../../context/ChartContext";
-
-const appendData = (dataStream, dataPoint) => {
-  let lastDataPoint = dataStream[dataStream.length - 1];
-  // Preventing memory issues - removes oldest values
-  if (dataStream.length > 1000) {
-    dataStream.slice(-1000);
-  }
-  return [...dataStream, { x: lastDataPoint.x + 0.05, y: dataPoint }];
-};
+import { appendData } from "../../utils/chartOptions";
 
 export default function RealtimeChart() {
   const { dataStream, setDataStream } = useChart();

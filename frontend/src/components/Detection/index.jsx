@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import ReactPlayer from "react-player";
 import Spinner from "react-bootstrap/Spinner";
 import { runCoco } from "../../helpers/detectMovement";
-
+import { detectAudio } from "../../helpers/detectAudio";
 import "./index.scss";
 import { useVideo } from "../../context/VideoContext";
 
@@ -15,8 +15,6 @@ export default function Detection({ view }) {
       ? videoRef.current.getInternalPlayer()
       : videoRef.current
     : null;
-
-  // Sound
   const audioContextRef = useRef(null);
   const analyserRef = useRef(null);
   const soundData = useRef(new Uint8Array(2048));
@@ -27,33 +25,13 @@ export default function Detection({ view }) {
   useEffect(() => {
     if (videoPlayer) {
       runCoco(videoRef, videoPlayer, canvasRef, setDetections);
-
-      // Create AudioContext
-      const audioContext = new AudioContext();
-      audioContextRef.current = audioContext;
-
-      // Create analyser node (expresses audio time & frequency data)
-      const analyser = new AnalyserNode(audioContext, { fftSize: 2048 });
-      analyserRef.current = analyser;
-
-      // Connect analyser to audio source
-      const source = audioContext.createMediaElementSource(videoPlayer);
-      source.connect(analyser);
-      analyser.connect(audioContext.destination);
-
-      // Set loop to check for sound
-      const soundCheckLoop = () => {
-        requestAnimationFrame(soundCheckLoop);
-        analyser.getByteFrequencyData(soundData.current);
-        const soundPlaying = soundData.current.some((val) => val > 0);
-
-        setSoundDetections(soundPlaying);
-      };
-      soundCheckLoop();
-
-      return () => {
-        audioContext.close();
-      };
+      detectAudio(
+        audioContextRef,
+        analyserRef,
+        soundData,
+        setSoundDetections,
+        videoPlayer
+      );
     }
   }, [playing]);
 

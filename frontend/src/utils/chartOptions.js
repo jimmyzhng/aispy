@@ -1,3 +1,12 @@
+export const appendData = (dataStream, dataPoint) => {
+  let lastDataPoint = dataStream[dataStream.length - 1];
+  // Preventing memory issues - removes oldest values
+  if (dataStream.length > 1000) {
+    dataStream.slice(-1000);
+  }
+  return [...dataStream, { x: lastDataPoint.x + 0.05, y: dataPoint }];
+};
+
 export const series = (data) => {
   return [
     {
