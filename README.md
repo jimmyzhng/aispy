@@ -21,6 +21,6 @@ cd ../frontend
 npm install
 ```
 
-To run the server, it is necessary to run `npm install` in both the backend and the frontend directories.
+To run the server, it is necessary to run `npm start` in both the backend and the frontend directories.
 
 This project also uses dotenv, so environment variables must be set before the application is functional.
