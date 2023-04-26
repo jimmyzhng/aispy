@@ -8,6 +8,7 @@ import View from './components/View';
 import PastBroadcast from './components/PastBroadcast';
 import { VideoProvider } from './context/VideoContext';
 import { ChartProvider } from './context/ChartContext';
+import PastBroadcastView from './components/PastBroadcastView';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
                   <Route path="/auth" element={<Auth />} />
                   <Route path="/view/:id" element={<View />} />
                   <Route path="/pastbroadcasts" element={<PastBroadcast />} />
+                  <Route path="/pastbroadcasts/:id" element={<PastBroadcastView />} />
                 </Routes>
               </div>
             </div>

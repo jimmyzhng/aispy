@@ -6,10 +6,10 @@ import PastBroadcastListItem from "../PastBroadcastListItem";
 import "./index.scss";
 
 export default function PastBroadcast() {
-  const [pastBroadcasts, setPastBroadcasts] = useState(null);
-  const { user, isLoggedIn } = useAuth();
+  const [pastBroadcastList, setPastBroadcastList] = useState(null);
+  const { user } = useAuth();
 
-  console.log("pastBroadcasts", pastBroadcasts);
+  console.log("pastBroadcastList", pastBroadcastList);
 
   useEffect(() => {
     if (user) {
@@ -20,7 +20,7 @@ export default function PastBroadcast() {
           },
         })
         .then((res) => {
-          setPastBroadcasts(res.data);
+          setPastBroadcastList(res.data);
         })
         .catch((err) => console.log(err));
     }
@@ -31,13 +31,13 @@ export default function PastBroadcast() {
       <h1 className="pb-title">Past Broadcasts</h1>
 
       <div className="pb-list">
-        {pastBroadcasts &&
-          pastBroadcasts.map((broadcast) => {
+        {pastBroadcastList &&
+          pastBroadcastList.map((broadcast) => {
             return (
               <PastBroadcastListItem
                 key={broadcast.id}
                 preview={broadcast.preview}
-                url={broadcast.url}
+                name={broadcast.name}
                 date={broadcast.date}
                 building={broadcast.building}
               />

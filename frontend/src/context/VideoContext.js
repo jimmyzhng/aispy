@@ -12,7 +12,6 @@ export function VideoProvider({ children }) {
   const [soundDetections, setSoundDetections] = useState(false);
   const [muted, setMuted] = useState(false);
 
-  // console.log('detections', detections);
 
   return (
     <VideoContext.Provider value={

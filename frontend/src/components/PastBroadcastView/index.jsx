@@ -3,7 +3,7 @@ import "./index.scss";
 import InfoBox from "../InfoBox";
 import { useParams } from "react-router-dom";
 
-export default function View() {
+export default function PastBroadcastView() {
   const { id } = useParams();
 
   return (
