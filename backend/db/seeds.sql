@@ -1,5 +1,5 @@
 INSERT INTO users (username, email, password)
-VALUES ('user1', 'user@test.ca', '123');
+VALUES ('user1', 'user@test.ca', '$2b$10$pYjHOY9D69WH5qyAPHHKV.FGGWeS/cPMei/77YNkLmgeMnKWp76I6');
 
 INSERT INTO videos (url, date, building, user_id)
 VALUES 

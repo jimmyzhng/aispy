@@ -49,7 +49,10 @@ export default function Auth() {
 
     axios
       .post("http://localhost:3001/api/users", { email, username, password })
-      .then((res) => console.log(res.data))
+      .then(() => {
+        auth.setIsLoggedIn(true);
+        navigate("/");
+      })
       .catch((err) => console.log(err.response.data));
   };
 

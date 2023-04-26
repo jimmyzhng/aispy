@@ -24,18 +24,16 @@ const getUserByUsername = (username) => {
     .catch(err => console.log(err));
 };
 
-const createUser = async (req, res) => {
-  const { username, email, password } = req.body;
+const getUserByUsernameOrEmail = (username, email) => {
+  return db.query('SELECT * FROM users WHERE username = $1 OR email = $2', [username, email])
+    .then(res => res.rows[0])
+    .catch(err => console.log(err));
+};
 
-  db.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *', [username, email, hashPassword(password)], (error, result) => {
-    if (error) {
-      throw error;
-    }
-
-    req.session.user = req.body;
-
-    res.status(201).send(`User added with ID: ${result.rows[0].id}`);
-  });
+const createUser = (username, email, password) => {
+  return db.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *', [username, email, hashPassword(password)])
+    .then(res => res.rows[0])
+    .catch(err => console.log(err));
 };
 
 const getVideos = (req, res) => {
@@ -51,5 +49,6 @@ const getVideos = (req, res) => {
 module.exports = {
   createUser,
   getUsers,
-  getUserByUsername
+  getUserByUsername,
+  getUserByUsernameOrEmail
 };
