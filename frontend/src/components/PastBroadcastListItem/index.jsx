@@ -12,7 +12,7 @@ export default function PastBroadcastListItem({
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/preview/${preview}`, {
+      .get(`http://localhost:3001/api/aws/${preview}`, {
         responseType: "blob",
       })
       .then((res) => URL.createObjectURL(res.data))
@@ -23,7 +23,7 @@ export default function PastBroadcastListItem({
   return (
     <div className="pb-list-item">
       <div className="pb-li-preview">
-        <img src={previewPic} />
+        <img src={previewPic} className="pb-li-preview-pic" />
       </div>
       <div className="pb-li-title">{date.slice(0, 10)}</div>
 

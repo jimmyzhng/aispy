@@ -8,6 +8,7 @@
   font-size: 24px;
   color: #fff;
   margin: 20px;
+  padding: 5rem 0;
 
   border: 2px solid #fff;
   border-radius: 10px;
@@ -15,5 +16,11 @@
   &:hover {
     cursor: pointer;
     opacity: 0.75;
+  }
+
+  .pb-li-preview-pic {
+    width: 10vw;
+    height: auto;
+    border-radius: 10px;
   }
 }
