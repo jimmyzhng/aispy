@@ -98,7 +98,7 @@ export default function Auth() {
           )}
 
           <div className="form-group mt-3">
-            <label>Username</label>
+            <label className="form-label">Username</label>
             <input
               type="text"
               className="form-control mt-1"
@@ -109,7 +109,7 @@ export default function Auth() {
           </div>
 
           <div className="form-group mt-3">
-            <label>Password</label>
+            <label className="form-label">Password</label>
             <input
               type="password"
               className="form-control mt-1"
@@ -122,7 +122,7 @@ export default function Auth() {
           <div className="d-grid gap-2 mt-3">
             <button
               type="submit"
-              className="btn btn-primary"
+              className="btn"
               onClick={authMode === "login" ? handleLogin : handleSignUp}
             >
               {authMode === "login" ? "Login" : "Register"}
