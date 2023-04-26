@@ -1,0 +1,19 @@
+.past-broadcast {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 3.5vh;
+
+  .pb-title {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.pb-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2.5vh;
+}

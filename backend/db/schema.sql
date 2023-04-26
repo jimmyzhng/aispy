@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS videos CASCADE;
 
   CREATE TABLE videos (
     id SERIAL PRIMARY KEY NOT NULL,
+    preview VARCHAR(255)
     url VARCHAR(255),
     date DATE,
     building VARCHAR(255),

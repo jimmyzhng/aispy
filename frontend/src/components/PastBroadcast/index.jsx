@@ -3,12 +3,14 @@ import ReactPlayer from "react-player";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
 import PastBroadcastListItem from "../PastBroadcastListItem";
+import "./index.scss";
 
 export default function PastBroadcast() {
   const [pastBroadcasts, setPastBroadcasts] = useState(null);
   const { user, isLoggedIn } = useAuth();
 
-  // console.log("pastBroadcasts", pastBroadcasts);
+  console.log("pastBroadcasts", pastBroadcasts);
+
   useEffect(() => {
     if (user) {
       axios
@@ -26,18 +28,22 @@ export default function PastBroadcast() {
 
   return (
     <div className="past-broadcast">
-      <h1>Past Broadcasts</h1>
+      <h1 className="pb-title">Past Broadcasts</h1>
 
-      {pastBroadcasts &&
-        pastBroadcasts.map((broadcast) => {
-          return (
-            <PastBroadcastListItem
-              key={broadcast.key}
-              date={broadcast.date}
-              building={broadcast.building}
-            />
-          );
-        })}
+      <div className="pb-list">
+        {pastBroadcasts &&
+          pastBroadcasts.map((broadcast) => {
+            return (
+              <PastBroadcastListItem
+                key={broadcast.id}
+                preview={broadcast.preview}
+                url={broadcast.url}
+                date={broadcast.date}
+                building={broadcast.building}
+              />
+            );
+          })}
+      </div>
     </div>
   );
 }
