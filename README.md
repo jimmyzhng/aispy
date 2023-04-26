@@ -4,7 +4,7 @@ AiSpy is a web application that provides a platform for users to manage a simula
 
 ## Tech Stack
 
-AiSpy was built primarily with React, Express.js, and PostgreSQL. For object detection, the project utilizes TensorFlow.js, pre-trained with the Coco-SSD model. Testing was completed with Jest. Apex Charts, a charting library built on Vue.js, was used for real-time graphing of detections. For sound detection, the Web Audio API was used to detect audio from the video source, and to obtain current frequency data in order to determine if sound is playing.Additionally, AWS S3 is used for storing simulated past broadcast videos. For secure login/signup, passwords are hashed with bcrypt, while express-session was used as middleware to manage sessions. Other notable libraries used include Axios, Bootstrap, React-Player, Dotenv, Animate.css, and many more!
+AiSpy was built primarily with React, Express.js, and PostgreSQL. For object detection, the project utilizes TensorFlow.js, pre-trained with the Coco-SSD model. Testing was completed with Jest. Apex Charts, a charting library built on Vue.js, was used for real-time graphing of detections. For sound detection, the Web Audio API was used to detect audio from the video source, and to obtain current frequency data in order to determine if sound is playing. Additionally, AWS S3 is used for storing simulated past broadcast videos. For secure login/signup, passwords are hashed with bcrypt, while express-session was used as middleware to manage sessions. Other notable libraries used include Axios, Bootstrap, React-Player, Dotenv, Animate.css, and many more!
 
 ## Demo
 
