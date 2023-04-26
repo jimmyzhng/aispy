@@ -8,7 +8,7 @@ AiSpy was built primarily with React, Express.js, and PostgreSQL. For object det
 
 ## Demo
 
-"Insert Demo Here"
+![](https://github.com/jimmyzhng/aispy/blob/master/frontend/public/aispy-demo.gif)
 
 ## Installation
 
