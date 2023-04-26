@@ -4,8 +4,6 @@ import App from "../App";
 
 test("renders without crashing", () => {
   render(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <App />
   );
 });
