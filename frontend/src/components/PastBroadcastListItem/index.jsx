@@ -1,4 +1,4 @@
-export default function PastBroadcastListItem({ path, date, building }) {
+export default function PastBroadcastListItem({ key, date, building }) {
   return (
     <div className="pb-list-item">
       <div className="pb-li-title">{date}</div>

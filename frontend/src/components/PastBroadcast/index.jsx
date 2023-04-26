@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
+import PastBroadcastListItem from "../PastBroadcastListItem";
 
 export default function PastBroadcast() {
   const [pastBroadcasts, setPastBroadcasts] = useState(null);
@@ -26,6 +27,17 @@ export default function PastBroadcast() {
   return (
     <div className="past-broadcast">
       <h1>Past Broadcasts</h1>
+
+      {pastBroadcasts &&
+        pastBroadcasts.map((broadcast) => {
+          return (
+            <PastBroadcastListItem
+              key={broadcast.key}
+              date={broadcast.date}
+              building={broadcast.building}
+            />
+          );
+        })}
     </div>
   );
 }
