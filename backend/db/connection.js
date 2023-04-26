@@ -10,9 +10,5 @@ const db = new Pool({
   port: process.env.DB_PORT,
 });
 
-db.connect(() => {
-  console.log("Connected to AiSpy Database");
-});
-
 module.exports = db;
 

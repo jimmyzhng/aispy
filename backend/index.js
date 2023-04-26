@@ -35,12 +35,6 @@ app.use(session({
   cookie: { maxAge: parseInt(process.env.SESSION_MAX_AGE) }
 }));
 
-// Debugging
-app.use((req, res, next) => {
-  // console.log('Session data:', req.session);
-  next();
-});
-
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/logout', logoutRouter);
@@ -52,3 +46,4 @@ app.listen(port, () => {
   console.log(`AiSpy Express running on port ${port}.`);
 });
 
+module.exports = app;
