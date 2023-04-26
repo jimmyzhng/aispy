@@ -36,13 +36,10 @@ const createUser = (username, email, password) => {
     .catch(err => console.log(err));
 };
 
-const getVideos = (req, res) => {
-  db.query('SELECT * FROM videos ORDER by id ASC', (error, result) => {
-    if (err) {
-      throw error;
-    }
-
-  });
+const getVideosByUserId = (id) => {
+  return db.query('SELECT * FROM videos WHERE user_id = $1', [id])
+    .then(res => res.rows)
+    .catch(err => console.log(err));
 };
 
 
@@ -50,5 +47,6 @@ module.exports = {
   createUser,
   getUsers,
   getUserByUsername,
-  getUserByUsernameOrEmail
+  getUserByUsernameOrEmail,
+  getVideosByUserId
 };
