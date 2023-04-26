@@ -13,6 +13,7 @@ const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const logoutRouter = require('./routes/logout');
 const videoRouter = require('./routes/videos');
+const previewRouter = require('./routes/preview');
 
 app.use(cors({
   origin: ["http://localhost:3000"],
@@ -44,6 +45,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/logout', logoutRouter);
 app.use('/api/videos', videoRouter);
+app.use('/api/preview', previewRouter);
 
 
 app.listen(port, () => {
