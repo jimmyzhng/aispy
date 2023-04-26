@@ -6,9 +6,9 @@ AiSpy is a web application that provides a platform for users to manage a simula
 
 AiSpy was built primarily with React, Express.js, and PostgreSQL. For object detection, the project utilizes TensorFlow.js, pre-trained with the Coco-SSD model. Testing was completed with Jest. Apex Charts, a charting library built on Vue.js, was used for real-time graphing of detections. Additionally, AWS S3 is used for storing simulated past broadcast videos. For secure login/signup, passwords are hashed with bcrypt, while express-session was used as middleware to manage sessions. Other notable libraries used include Axios, Bootstrap, React-Player, Dotenv, Animate.css, and many more!
 
-## Screenshots
+## Demo
 
-"Insert Screenshots Here" (homepage, view, past broadcasts)
+"Insert Demo Here"
 
 ## Installation
 

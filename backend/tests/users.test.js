@@ -15,9 +15,9 @@ describe('POST /users', () => {
     const response = await request
       .post('/api/users')
       .send({
-        username: 'test',
-        password: 'test',
-        email: 'test@test.com'
+        username: 'test123',
+        password: 'test123',
+        email: 'test123123@test.com'
       });
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);
@@ -48,8 +48,10 @@ describe('POST /users', () => {
 
 });
 
-afterAll((done) => {
-  app.close(done);
+afterAll(() => {
+  const server = app.listen();
+  server.close();
 });
+
 
 

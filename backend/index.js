@@ -42,7 +42,7 @@ app.use('/api/videos', videoRouter);
 app.use('/api/aws', awsRouter);
 
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`AiSpy Express running on port ${port}.`);
 });
 
