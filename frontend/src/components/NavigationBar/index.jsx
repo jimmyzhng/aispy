@@ -3,17 +3,20 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import "./index.scss";
 import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import axios from "axios";
 
 export default function NavigationBar() {
   const auth = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await axios.post("http://localhost:3001/api/logout");
       auth.setIsLoggedIn(false);
       auth.setUser(null);
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
