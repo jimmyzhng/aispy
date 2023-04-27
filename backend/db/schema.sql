@@ -16,5 +16,6 @@ DROP TABLE IF EXISTS videos CASCADE;
     date DATE,
     building VARCHAR(255),
     user_id INT,
+    past_broadcast BOOLEAN,
     FOREIGN KEY (user_id) REFERENCES users(id)
   );
