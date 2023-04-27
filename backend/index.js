@@ -12,8 +12,9 @@ const helmet = require("helmet");
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const logoutRouter = require('./routes/logout');
-const videoRouter = require('./routes/videos');
+const videoListRouter = require('./routes/videoList');
 const awsRouter = require('./routes/aws');
+const videoRouter = require('./routes/video');
 
 app.use(cors({
   origin: ["http://localhost:3000"],
@@ -38,7 +39,8 @@ app.use(session({
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/logout', logoutRouter);
-app.use('/api/videos', videoRouter);
+app.use('/api/video', videoRouter);
+app.use('/api/videoList', videoListRouter);
 app.use('/api/aws', awsRouter);
 
 

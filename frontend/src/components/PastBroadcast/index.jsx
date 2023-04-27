@@ -16,7 +16,7 @@ export default function PastBroadcast() {
   useEffect(() => {
     if (user) {
       axios
-        .get("http://localhost:3001/api/videos", {
+        .get("http://localhost:3001/api/videoList", {
           params: {
             id: user.id,
           },
