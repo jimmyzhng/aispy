@@ -22,7 +22,12 @@ export default function PastBroadcast() {
           },
         })
         .then((res) => {
-          setPastBroadcastList(res.data);
+          const videos = res.data;
+          console.log("videos", videos);
+          const pastBroadcastList = videos.filter(
+            (vid) => vid.past_broadcast === true
+          );
+          setPastBroadcastList(pastBroadcastList);
         })
         .catch((err) => console.log(err));
     }
