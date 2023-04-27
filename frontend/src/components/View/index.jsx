@@ -8,8 +8,8 @@ import { useVideo } from "../../context/VideoContext";
 
 export default function View() {
   const { id } = useParams();
-  const { currentView, setCurrentView } = useVideo();
-  console.log("currentView", currentView);
+  const { currentView, setCurrentView, setVideo } = useVideo();
+  // console.log("currentView", currentView);
 
   useEffect(() => {
     axios
@@ -18,7 +18,21 @@ export default function View() {
           id,
         },
       })
-      .then((res) => setCurrentView(res.data))
+      .then((res) => {
+        let currentViewDesc = res.data;
+        setCurrentView(currentViewDesc);
+
+        // Make request to AWS to retrieve video with given name
+        axios
+          .get(`http://localhost:3001/api/aws/${currentViewDesc.name}`, {
+            responseType: "blob",
+          })
+          .then((res) => URL.createObjectURL(res.data))
+          .then((video) => {
+            setVideo(video);
+          })
+          .catch((err) => console.log(err));
+      })
       .catch((err) => console.log(err));
   }, []);
 

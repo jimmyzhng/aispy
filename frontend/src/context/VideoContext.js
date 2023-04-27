@@ -8,6 +8,7 @@ export function useVideo() {
 
 export function VideoProvider({ children }) {
   const [currentView, setCurrentView] = useState(null);
+  const [video, setVideo] = useState(null);
   const [playing, setPlaying] = useState(false);
   const [detections, setDetections] = useState([]);
   const [soundDetections, setSoundDetections] = useState(false);
@@ -18,6 +19,7 @@ export function VideoProvider({ children }) {
     <VideoContext.Provider value={
       {
         currentView, setCurrentView,
+        video, setVideo,
         playing, setPlaying,
         detections, setDetections,
         soundDetections, setSoundDetections,
