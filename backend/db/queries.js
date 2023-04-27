@@ -36,6 +36,12 @@ const createUser = (username, email, password) => {
     .catch(err => console.log(err));
 };
 
+const getVideoById = (id) => {
+  return db.query('SELECT * FROM videos WHERE id = $1', [id])
+    .then(res => res.rows[0])
+    .catch(err => console.log(err));
+};
+
 const getVideosByUserId = (id) => {
   return db.query('SELECT * FROM videos WHERE user_id = $1', [id])
     .then(res => res.rows)
@@ -48,5 +54,6 @@ module.exports = {
   getUsers,
   getUserByUsername,
   getUserByUsernameOrEmail,
+  getVideoById,
   getVideosByUserId
 };

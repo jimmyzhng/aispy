@@ -26,7 +26,7 @@ function App() {
                   <Route path="/auth" element={<Auth />} />
                   <Route path="/view/:id" element={<View />} />
                   <Route path="/pastbroadcasts" element={<PastBroadcast />} />
-                  <Route path="/pastbroadcasts/:id" element={<PastBroadcastView />} />
+                  <Route path="/pastbroadcasts/:id" element={<View />} />
                 </Routes>
               </div>
             </div>

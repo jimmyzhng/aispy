@@ -4,9 +4,9 @@ import axios from "axios";
 
 export default function PastBroadcastListItem({
   preview,
-  name,
   date,
   building,
+  onClick,
 }) {
   const [previewPic, setPreviewPic] = useState(null);
 
@@ -21,7 +21,7 @@ export default function PastBroadcastListItem({
   }, [preview]);
 
   return (
-    <div className="pb-list-item">
+    <div className="pb-list-item" onClick={onClick}>
       <div className="pb-li-preview">
         <img src={previewPic} className="pb-li-preview-pic" />
       </div>

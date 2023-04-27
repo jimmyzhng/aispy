@@ -12,7 +12,7 @@ export function VideoProvider({ children }) {
   const [detections, setDetections] = useState([]);
   const [soundDetections, setSoundDetections] = useState(false);
   const [muted, setMuted] = useState(false);
-
+  const [pastBroadcast, setPastBroadcast] = useState(false);
 
   return (
     <VideoContext.Provider value={
