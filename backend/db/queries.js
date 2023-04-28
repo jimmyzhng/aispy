@@ -43,7 +43,7 @@ const getVideoById = (id) => {
 };
 
 const getVideosByUserId = (id) => {
-  return db.query('SELECT * FROM videos WHERE user_id = $1', [id])
+  return db.query('SELECT * FROM videos WHERE user_id = $1 ORDER BY date DESC', [id])
     .then(res => res.rows)
     .catch(err => console.log(err));
 };
