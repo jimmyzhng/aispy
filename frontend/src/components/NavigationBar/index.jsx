@@ -6,10 +6,12 @@ import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import axios from "axios";
+import { useVideo } from "../../context/VideoContext";
 
 export default function NavigationBar() {
   const auth = useAuth();
   const navigate = useNavigate();
+  const { setPastBroadcast } = useVideo();
 
   const handleLogout = async () => {
     try {
@@ -36,13 +38,16 @@ export default function NavigationBar() {
               <>
                 <Nav.Link href="/">Home</Nav.Link>
                 <NavDropdown title="Views" id="collasible-nav-dropdown">
-                  <NavDropdown.Item href="/view/north">
+                  <NavDropdown.Item
+                    href="/view/1"
+                    onClick={() => setPastBroadcast(false)}
+                  >
                     Building: North Exit
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/view/south">
+                  <NavDropdown.Item href="/view/2">
                     Building: South Exit
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/view/west">
+                  <NavDropdown.Item href="/view/3">
                     Building: West Exit
                   </NavDropdown.Item>
                   <NavDropdown.Divider />

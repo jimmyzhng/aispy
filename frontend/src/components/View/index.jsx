@@ -35,6 +35,7 @@ export default function View() {
       })
       .catch((err) => console.log(err));
   }, []);
+  console.log(currentView);
 
   return (
     <div className="View">

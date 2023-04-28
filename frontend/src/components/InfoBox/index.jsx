@@ -6,13 +6,22 @@ import { GoUnmute, GoMute } from "react-icons/go";
 
 import { useVideo } from "../../context/VideoContext";
 import { AiFillAudio } from "react-icons/ai";
-import { BsPersonFillExclamation } from "react-icons/bs";
+import { BsPersonFillExclamation, BsDisplayFill } from "react-icons/bs";
 import personCount from "../../helpers/personCount";
 import RealtimeChart from "../RealtimeChart";
 import classNames from "classnames";
+import PastBroadcast from "../PastBroadcast";
 
 export default function InfoBox({ view }) {
-  const { playing, detections, soundDetections, muted, setMuted } = useVideo();
+  const {
+    playing,
+    detections,
+    soundDetections,
+    muted,
+    setMuted,
+    currentView,
+    pastBroadcast,
+  } = useVideo();
 
   const movementDetectionClass = classNames({
     "infobox-detections": true,
@@ -23,6 +32,10 @@ export default function InfoBox({ view }) {
     "infobox-detections": true,
     active: soundDetections,
   });
+
+  if (!currentView) {
+    return null;
+  }
 
   return (
     <div className="infobox-cont">
@@ -40,12 +53,16 @@ export default function InfoBox({ view }) {
         />
       )}
       <div className="infobox-title">{`Building: ${capitalizeFirstLetter(
-        view
+        currentView.building
       )} Exit`}</div>
 
       <div className="infobox-desc">
         <div className="infobox-live">
-          {playing ? (
+          {pastBroadcast ? (
+            <>
+              <BsDisplayFill /> {`Replay (${currentView.date.slice(0, 10)})`}
+            </>
+          ) : playing ? (
             <>
               <BsFillRecordFill /> Live
             </>

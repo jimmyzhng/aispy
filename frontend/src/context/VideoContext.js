@@ -23,7 +23,8 @@ export function VideoProvider({ children }) {
         playing, setPlaying,
         detections, setDetections,
         soundDetections, setSoundDetections,
-        muted, setMuted
+        muted, setMuted,
+        pastBroadcast, setPastBroadcast
       }}>
       {children}
     </VideoContext.Provider>

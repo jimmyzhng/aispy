@@ -5,11 +5,13 @@ import { useAuth } from "../../context/AuthContext";
 import PastBroadcastListItem from "../PastBroadcastListItem";
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
+import { useVideo } from "../../context/VideoContext";
 
 export default function PastBroadcast() {
   const [pastBroadcastList, setPastBroadcastList] = useState(null);
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { setPastBroadcast } = useVideo();
 
   console.log("pastBroadcastList", pastBroadcastList);
 
@@ -48,6 +50,7 @@ export default function PastBroadcast() {
                 date={broadcast.date}
                 building={broadcast.building}
                 onClick={() => {
+                  setPastBroadcast(true);
                   navigate(`/pastbroadcasts/${broadcast.id}`);
                 }}
               />

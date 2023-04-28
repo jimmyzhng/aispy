@@ -19,8 +19,14 @@ export default function Detection({ view }) {
   const analyserRef = useRef(null);
   const soundData = useRef(new Uint8Array(2048));
 
-  const { setPlaying, playing, setDetections, setSoundDetections, muted } =
-    useVideo();
+  const {
+    setPlaying,
+    playing,
+    setDetections,
+    setSoundDetections,
+    video,
+    muted,
+  } = useVideo();
 
   useEffect(() => {
     if (videoPlayer) {
@@ -41,7 +47,7 @@ export default function Detection({ view }) {
 
       <ReactPlayer
         ref={videoRef}
-        url={`${process.env.PUBLIC_URL}/view/${view}.mp4`}
+        url={video}
         loop
         playing
         muted={muted}
