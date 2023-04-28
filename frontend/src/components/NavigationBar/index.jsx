@@ -44,14 +44,23 @@ export default function NavigationBar() {
                   >
                     Building: North Exit
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/view/2">
+                  <NavDropdown.Item
+                    href="/view/2"
+                    onClick={() => setPastBroadcast(false)}
+                  >
                     Building: South Exit
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/view/3">
+                  <NavDropdown.Item
+                    href="/view/3"
+                    onClick={() => setPastBroadcast(false)}
+                  >
                     Building: West Exit
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="/pastbroadcasts">
+                  <NavDropdown.Item
+                    href="/pastbroadcasts"
+                    onClick={() => setPastBroadcast(false)}
+                  >
                     Past Broadcasts
                   </NavDropdown.Item>
                 </NavDropdown>

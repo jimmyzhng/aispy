@@ -26,6 +26,7 @@ export default function Detection({ view }) {
     setSoundDetections,
     video,
     muted,
+    pastBroadcast,
   } = useVideo();
 
   useEffect(() => {
