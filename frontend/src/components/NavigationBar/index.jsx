@@ -9,15 +9,15 @@ import axios from "axios";
 import { useVideo } from "../../context/VideoContext";
 
 export default function NavigationBar() {
-  const auth = useAuth();
+  const { setIsLoggedIn, isLoggedIn, setUser, user } = useAuth();
   const navigate = useNavigate();
   const { setPastBroadcast } = useVideo();
 
   const handleLogout = async () => {
     try {
       await axios.post("http://localhost:3001/api/logout");
-      auth.setIsLoggedIn(false);
-      auth.setUser(null);
+      setIsLoggedIn(false);
+      setUser(null);
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -34,7 +34,7 @@ export default function NavigationBar() {
 
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            {auth.user && (
+            {user && (
               <>
                 <Nav.Link href="/">Home</Nav.Link>
                 <NavDropdown title="Views" id="collasible-nav-dropdown">
@@ -69,9 +69,9 @@ export default function NavigationBar() {
           </Nav>
 
           <Nav>
-            {auth.isLoggedIn && auth.user ? (
+            {isLoggedIn && user ? (
               <NavDropdown
-                title={`Signed in as: ${auth.user.username}`}
+                title={`Signed in as: ${user.username}`}
                 id="collasible-nav-dropdown"
               >
                 <NavDropdown.Item onClick={handleLogout}>
