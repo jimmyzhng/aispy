@@ -46,14 +46,14 @@ cd backend
 touch .env
 ```
 
-This project uses PostgreSQL, so you may use your own database information if you would like.
+This project uses PostgreSQL, so you may use your own database information if you would like. By default, the database name is "aispy".
 
 ```
-DB_HOST=localhost
-DB_USER=labber
-DB_PASS=3313
+DB_HOST=
+DB_USER=
+DB_PASS=
 DB_NAME=aispy
-DB_PORT=5432
+DB_PORT=
 ```
 
 For our sessions, we have a session key, and a max age. I used an arbitrary number for the key, and our max age is set to 60 minutes.

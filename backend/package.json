@@ -7,7 +7,7 @@
     "test": "jest --no-cache --runInBand --forceExit",
     "test:watch": "jest --watch",
     "start": "nodemon index.js",
-    "db:reset": "psql -d aispy -f db/schema.sql && psql -d aispy -f db/seeds.sql"
+    "db:reset": "if psql -lqt | cut -d \\| -f 1 | grep -qw aispy; then dropdb aispy; fi && createdb aispy && psql -d aispy -f db/schema.sql && psql -d aispy -f db/seeds.sql"
   },
   "keywords": [],
   "author": "",
