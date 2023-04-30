@@ -4,7 +4,7 @@ AiSpy is a web application that provides a platform for users to manage a simula
 
 ## Functionality
 
-Once a user logs in and selects their view of choice, they have access to the details of that current view. When a video is playing, the user is informed that the video is live. Any object detections that occur at the current state of the video will alert the user that movement is detected. When sound is outputted in the video, the user is informed that audio has been detected. The graph below takes in the current state of person detections, and displays it in a real-time graph.
+Once a user logs in and selects their view of choice, they have access to the details of that current view. When a video is playing, the user is informed that the video is live. Any object detections that occur at the current state of the video will alert the user that movement is detected. When sound is outputted in the video, the user is informed that audio has been detected. The user also has the ability to mute the video. Finally, The graph below takes in the current state of person detections, and displays it in a real-time graph.
 
 A user is also able to watch their past broadcasts that are stored in AWS S3. Instead of showing the user that the video is live, it displays the date of the replay.
 
