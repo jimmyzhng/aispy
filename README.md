@@ -39,7 +39,7 @@ cd backend
 touch .env
 ```
 
-This project uses PostgreSQL, so you may use your own databse information if you would like.
+This project uses PostgreSQL, so you may use your own database information if you would like.
 
 ```
 DB_HOST=localhost
@@ -59,9 +59,9 @@ SESSION_MAX_AGE=3600000
 To access our project videos, I used AWS S3. This requires my access key ID and the secret access key ID in order to access my Aispy bucket. Please contact me if you need this!
 
 ```
-AWS_ACCESS_KEY_ID=AKIARECU7OFL3MNAT2M3
-AWS_SECRET_ACCESS_KEY=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
-AWS_REGION=us-west-2
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_REGION=
 ```
 
 ## Using the application
