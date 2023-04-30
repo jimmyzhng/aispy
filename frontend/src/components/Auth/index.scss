@@ -1,17 +1,32 @@
-.Auth-form-container {
+.Auth-form-page {
+  width: 100vw;
+  height: 95vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
   color: #fff;
+  overflow: hidden;
+
+  .Auth-error {
+    position: absolute;
+    top: -60px;
+    left: 0;
+    right: 0;
+    border: 3px solid red;
+    border-radius: 8px;
+    width: 420px;
+    color: red;
+    padding: 5px;
+    display: none;
+  }
 
   .Auth-form {
     width: 420px;
     padding-top: 30px;
-    padding-bottom: 20px;
+    padding-bottom: 30px;
     border-radius: 8px;
     background-color: #022140;
+    position: relative;
 
     .Auth-form-content {
       padding-left: 12%;

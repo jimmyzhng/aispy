@@ -3,6 +3,7 @@ import axios from "axios";
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { RiErrorWarningFill } from "react-icons/ri";
 
 axios.defaults.withCredentials = true;
 
@@ -57,8 +58,11 @@ export default function Auth() {
   };
 
   return (
-    <div className="Auth-form-container">
+    <div className="Auth-form-page">
       <form className="Auth-form">
+        <div className="Auth-error">
+          <RiErrorWarningFill /> Error:
+        </div>
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">
             {authMode === "login" ? "Login" : "Register"}
