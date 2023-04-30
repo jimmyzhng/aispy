@@ -12,15 +12,71 @@ AiSpy was built primarily with React, Express.js, and PostgreSQL. For object det
 
 ## Installation
 
+1. Clone the Repository
+
+```
+git clone git@github.com:jimmyzhng/aispy.git
+```
+
+2. Installing Dependencies
+
 There are two folders, backend and frontend. You will have to change into both directories and run "npm install", before you are able to run the application. Here are the steps for installation:
 
 ```
+
 cd backend
 npm install
 cd ../frontend
 npm install
+
 ```
 
-To run the server, it is necessary to run `npm start` in both the backend and the frontend directories.
+3. Create the Environment Variables
+   This project uses dotenv, so environment variables must be set before the application is functional. To configure these variables, create a .env file in the backend directory.
 
-This project also uses dotenv, so environment variables must be set before the application is functional.
+```
+cd backend
+touch .env
+```
+
+This project uses PostgreSQL, so you may use your own databse information if you would like.
+
+```
+DB_HOST=localhost
+DB_USER=labber
+DB_PASS=3313
+DB_NAME=aispy
+DB_PORT=5432
+```
+
+For our sessions, we have a session key, and a max age. I used an arbitrary number for the key, and our max age is set to 60 minutes.
+
+```
+SESSION_KEY=12345
+SESSION_MAX_AGE=3600000
+```
+
+To access our project videos, I used AWS S3. This requires my access key ID and the secret access key ID in order to access my Aispy bucket. Please contact me if you need this!
+
+```
+AWS_ACCESS_KEY_ID=AKIARECU7OFL3MNAT2M3
+AWS_SECRET_ACCESS_KEY=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
+AWS_REGION=us-west-2
+```
+
+## Using the application
+
+1. Before you first run the server, it is optimal to reset the database. Once you navigate to the backend directory, run:
+
+```
+npm run db:reset
+```
+
+2. Next, you would have to launch the backend server, and our frontend client. This requires us to run `npm start` in both of our project directories.
+
+3. By default, all of our videos belong to the first user that is seeded into our database. Login with credentials:
+
+```
+Username: user1
+Password: 123
+```
