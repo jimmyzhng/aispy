@@ -9,13 +9,13 @@ router.post('/', async (req, res) => {
   const { username, password, email } = req.body;
 
   if (!username || !password || !email) {
-    return res.status(400).send("Error: Credentials missing.");
+    return res.status(400).send("Credentials missing.");
   }
 
   const existingUser = await db.getUserByUsernameOrEmail(username, email);
 
   if (existingUser) {
-    return res.status(409).send("Error: User exists already.");
+    return res.status(409).send("User exists already.");
   }
 
   try {

@@ -18,6 +18,7 @@ export default function Auth() {
   const navigate = useNavigate();
 
   const changeAuthMode = () => {
+    auth.setError(null);
     setAuthMode(authMode === "login" ? "register" : "login");
   };
 
@@ -42,7 +43,7 @@ export default function Auth() {
         auth.setIsLoggedIn(true);
         navigate("/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => auth.setError(err.response.data));
   };
 
   const handleSignUp = (e) => {
@@ -54,15 +55,17 @@ export default function Auth() {
         auth.setIsLoggedIn(true);
         navigate("/");
       })
-      .catch((err) => console.log(err.response.data));
+      .catch((err) => auth.setError(err.response.data));
   };
 
   return (
     <div className="Auth-form-page">
       <form className="Auth-form">
-        <div className="Auth-error">
-          <RiErrorWarningFill /> Error:
-        </div>
+        {auth.error && (
+          <div className="Auth-error">
+            <RiErrorWarningFill /> {`Error: ${auth.error}`}
+          </div>
+        )}
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">
             {authMode === "login" ? "Login" : "Register"}

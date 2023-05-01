@@ -10,6 +10,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
   // console.log('user', user);
 
   useEffect(() => {
@@ -22,7 +23,11 @@ export function AuthProvider({ children }) {
   }, [isLoggedIn]);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, setUser }}>
+    <AuthContext.Provider value={{
+      isLoggedIn, setIsLoggedIn,
+      user, setUser,
+      error, setError
+    }}>
       {children}
     </AuthContext.Provider>
   );
