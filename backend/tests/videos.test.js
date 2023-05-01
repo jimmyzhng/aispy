@@ -4,7 +4,7 @@ const request = supertest(app);
 
 describe('GET /videos', () => {
   test('should return an array of videos', async () => {
-    const response = await request.get('/api/videos?id=1');
+    const response = await request.get('/api/videoList?id=1');
     expect(response.status).toBe(200);
     expect(Array.isArray(response.body)).toBe(true);
   });

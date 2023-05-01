@@ -12,12 +12,13 @@ describe('GET /users', () => {
 
 describe('POST /users', () => {
   test('should create a new user with success message', async () => {
+    const user = "user" + Math.random() * 100;
     const response = await request
       .post('/api/users')
       .send({
-        username: 'test123',
+        username: user,
         password: 'test123',
-        email: 'test123123@test.com'
+        email: `${user}@test.com`
       });
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);
@@ -31,7 +32,7 @@ describe('POST /users', () => {
         password: 'testtest'
       });
     expect(response.status).toBe(400);
-    expect(response.text).toBe('Error: Credentials missing.');
+    expect(response.text).toBe('Credentials missing.');
   });
 
   test('should return error message if user already exists', async () => {
@@ -43,7 +44,7 @@ describe('POST /users', () => {
         email: 'user@test.ca'
       });
     expect(response.status).toBe(409);
-    expect(response.text).toBe('Error: User exists already.');
+    expect(response.text).toBe('User exists already.');
   });
 
 });

@@ -17,7 +17,7 @@ function App() {
       <AuthProvider>
         <VideoProvider>
           <ChartProvider>
-            <div className="App">
+            <div className="App" data-testid="app">
               <NavigationBar />
               <div className="content">
                 <Routes>

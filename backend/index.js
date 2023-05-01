@@ -44,8 +44,8 @@ app.use('/api/videoList', videoListRouter);
 app.use('/api/aws', awsRouter);
 
 
-const server = app.listen(port, () => {
-  console.log(`AiSpy Express running on port ${port}.`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => console.log(`Aispy Express listening on port ${port}`));
+}
 
 module.exports = app;

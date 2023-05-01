@@ -1,4 +1,4 @@
-const { app } = require('../index'); // Link to your server file
+const app = require('../index'); // Link to your server file
 const supertest = require('supertest');
 const request = supertest(app);
 
@@ -21,7 +21,7 @@ describe('POST /login', () => {
   });
 
   test('POST /login should return status code 401 if incorrect password', async () => {
-    const response = await request(app)
+    const response = await request
       .post('/api/login')
       .send({ username: 'user1', password: '1231312313' });
     expect(response.status).toBe(401);
