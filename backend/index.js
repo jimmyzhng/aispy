@@ -3,7 +3,6 @@ require('dotenv').config();
 const session = require('express-session');
 const express = require('express');
 const app = express();
-const router = express.Router();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const port = 3001;

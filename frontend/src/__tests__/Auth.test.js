@@ -25,4 +25,19 @@ describe("Auth Component", () => {
     const { getByRole } = render(<Router><Auth /></Router>);
     expect(getByRole('button', { name: /Login/ })).toBeInTheDocument();
   });
+
+  it('should log in user when submitting login form', async () => {
+    const mockedAxios = axios;
+
+    mockedAxios.post.mockResolvedValueOnce({ data: { success: true } });
+
+    const authValue = { isLoggedIn: false, error: false };
+    useAuth.mockReturnValue(authValue);
+
+    const { getByPlaceholderText, getByRole } = render(<Router><Auth /></Router>);
+    fireEvent.change(getByPlaceholderText("Enter username"), { target: { value: "user1" } });
+    fireEvent.change(getByPlaceholderText("Enter password"), { target: { value: "123" } });
+    fireEvent.click(getByRole('button', { name: /Login/ }));
+
+  });
 });
