@@ -8,17 +8,24 @@ import { RiErrorWarningFill } from "react-icons/ri";
 axios.defaults.withCredentials = true;
 
 export default function Auth() {
-  const [authMode, setAuthMode] = useState("login");
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const auth = useAuth();
+  const {
+    username,
+    setUsername,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    authMode,
+    setAuthMode,
+    setError,
+    error,
+    setIsLoggedIn,
+  } = useAuth();
 
   const navigate = useNavigate();
 
   const changeAuthMode = () => {
-    auth.setError(null);
+    setError(null);
     setAuthMode(authMode === "login" ? "register" : "login");
   };
 
@@ -40,10 +47,10 @@ export default function Auth() {
     axios
       .post("http://localhost:3001/api/login", { username, password })
       .then(() => {
-        auth.setIsLoggedIn(true);
+        setIsLoggedIn(true);
         navigate("/");
       })
-      .catch((err) => auth.setError(err.response.data));
+      .catch((err) => setError(err.response.data));
   };
 
   const handleSignUp = (e) => {
@@ -52,18 +59,18 @@ export default function Auth() {
     axios
       .post("http://localhost:3001/api/users", { email, username, password })
       .then(() => {
-        auth.setIsLoggedIn(true);
+        setIsLoggedIn(true);
         navigate("/");
       })
-      .catch((err) => auth.setError(err.response.data));
+      .catch((err) => setError(err.response.data));
   };
 
   return (
     <div className="Auth-form-page">
       <form className="Auth-form">
-        {auth.error && (
+        {error && (
           <div className="Auth-error">
-            <RiErrorWarningFill /> {`Error: ${auth.error}`}
+            <RiErrorWarningFill /> {`Error: ${error}`}
           </div>
         )}
         <div className="Auth-form-content">

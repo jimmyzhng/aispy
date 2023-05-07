@@ -8,9 +8,15 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+  const [authMode, setAuthMode] = useState("login");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+
+  // Auth Login Form
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     axios.get('http://localhost:3001/api/login')
@@ -23,9 +29,13 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={{
+      authMode, setAuthMode,
       isLoggedIn, setIsLoggedIn,
       user, setUser,
-      error, setError
+      error, setError,
+      username, setUsername,
+      email, setEmail,
+      password, setPassword
     }}>
       {children}
     </AuthContext.Provider>
