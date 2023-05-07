@@ -1,11 +1,15 @@
-import { useState } from "react";
-import axios from "axios";
 import "./index.scss";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { RiErrorWarningFill } from "react-icons/ri";
-
-axios.defaults.withCredentials = true;
+import {
+  changeAuthMode,
+  handleUsernameChange,
+  handleEmailChange,
+  handlePasswordChange,
+  handleLogin,
+  handleSignUp,
+} from "../../helpers/authHelpers";
 
 export default function Auth() {
   const {
@@ -23,47 +27,6 @@ export default function Auth() {
   } = useAuth();
 
   const navigate = useNavigate();
-
-  const changeAuthMode = () => {
-    setError(null);
-    setAuthMode(authMode === "login" ? "register" : "login");
-  };
-
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-
-    axios
-      .post("http://localhost:3001/api/login", { username, password })
-      .then(() => {
-        setIsLoggedIn(true);
-        navigate("/");
-      })
-      .catch((err) => setError(err.response.data));
-  };
-
-  const handleSignUp = (e) => {
-    e.preventDefault();
-
-    axios
-      .post("http://localhost:3001/api/users", { email, username, password })
-      .then(() => {
-        setIsLoggedIn(true);
-        navigate("/");
-      })
-      .catch((err) => setError(err.response.data));
-  };
 
   return (
     <div className="Auth-form-page">
@@ -83,7 +46,12 @@ export default function Auth() {
               <p>
                 {" "}
                 Not registered yet?{" "}
-                <span className="link-primary" onClick={changeAuthMode}>
+                <span
+                  className="link-primary"
+                  onClick={() =>
+                    changeAuthMode(setError, setAuthMode, authMode)
+                  }
+                >
                   Sign Up
                 </span>
               </p>
@@ -91,7 +59,12 @@ export default function Auth() {
               <p>
                 {" "}
                 Already registered?{" "}
-                <span className="link-primary" onClick={changeAuthMode}>
+                <span
+                  className="link-primary"
+                  onClick={() =>
+                    changeAuthMode(setError, setAuthMode, authMode)
+                  }
+                >
                   Login
                 </span>
               </p>
@@ -106,7 +79,7 @@ export default function Auth() {
                 className="form-control mt-1"
                 placeholder="Enter email"
                 value={email}
-                onChange={handleEmailChange}
+                onChange={(e) => handleEmailChange(e, setEmail)}
               />
             </div>
           )}
@@ -118,7 +91,7 @@ export default function Auth() {
               className="form-control mt-1"
               placeholder="Enter username"
               value={username}
-              onChange={handleUsernameChange}
+              onChange={(e) => handleUsernameChange(e, setUsername)}
             />
           </div>
 
@@ -129,7 +102,7 @@ export default function Auth() {
               className="form-control mt-1"
               placeholder="Enter password"
               value={password}
-              onChange={handlePasswordChange}
+              onChange={(e) => handlePasswordChange(e, setPassword)}
             />
           </div>
 
@@ -137,7 +110,26 @@ export default function Auth() {
             <button
               type="submit"
               className="btn"
-              onClick={authMode === "login" ? handleLogin : handleSignUp}
+              onClick={(e) => {
+                authMode === "login"
+                  ? handleLogin(
+                      e,
+                      setIsLoggedIn,
+                      setError,
+                      username,
+                      password,
+                      navigate
+                    )
+                  : handleSignUp(
+                      e,
+                      setIsLoggedIn,
+                      setError,
+                      email,
+                      username,
+                      password,
+                      navigate
+                    );
+              }}
             >
               {authMode === "login" ? "Login" : "Register"}
             </button>
