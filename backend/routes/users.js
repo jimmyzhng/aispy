@@ -12,13 +12,12 @@ router.post('/', async (req, res) => {
     return res.status(400).send("Credentials missing.");
   }
 
-  const existingUser = await db.getUserByUsernameOrEmail(username, email);
-
-  if (existingUser) {
-    return res.status(409).send("User exists already.");
-  }
-
   try {
+    const existingUser = await db.getUserByUsernameOrEmail(username, email);
+
+    if (existingUser) {
+      return res.status(409).send("User exists already.");
+    }
 
     await db.createUser(username, email, password);
     const user = await db.getUserByUsername(username);
@@ -26,8 +25,8 @@ router.post('/', async (req, res) => {
     res.send({ success: true });
   } catch (err) {
     console.error(err);
+    res.status(500).send('An error occurred while signing up.');
   }
-
 });
 
 module.exports = router;

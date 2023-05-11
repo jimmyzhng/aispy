@@ -15,19 +15,25 @@ router.get('/', (req, res) => {
 // User logging in and out
 router.post('/', async (req, res) => {
   const { username, password } = req.body;
-  const user = await db.getUserByUsername(username);
+  try {
+    const user = await db.getUserByUsername(username);
 
-  if (!user) {
-    return res.status(401).send('User does not exist!');
+    if (!user) {
+      return res.status(401).send('User does not exist!');
+    }
+
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordCorrect) {
+      return res.status(401).send(`Invalid username or password.`);
+    }
+    req.session.user = user;
+    res.send({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('An error occurred while fetching the user.');
   }
 
-  const isPasswordCorrect = await bcrypt.compare(password, user.password);
-
-  if (!isPasswordCorrect) {
-    return res.status(401).send(`Invalid username or password.`);
-  }
-  req.session.user = user;
-  res.send({ success: true });
 }
 );
 
