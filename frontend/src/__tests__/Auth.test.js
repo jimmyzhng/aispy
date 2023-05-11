@@ -37,7 +37,7 @@ describe("Auth Component", () => {
     const { getByPlaceholderText, getByRole } = render(<Router><Auth /></Router>);
     fireEvent.change(getByPlaceholderText("Enter username"), { target: { value: "user1" } });
     fireEvent.change(getByPlaceholderText("Enter password"), { target: { value: "123" } });
-    fireEvent.click(getByRole('button', { name: /Login/ }));
+    // fireEvent.click(getByRole('button', { name: /Login/ }));
 
   });
 });

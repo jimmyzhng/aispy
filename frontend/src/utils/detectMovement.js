@@ -34,7 +34,7 @@ export const runCoco = async (videoRef, videoPlayer, canvasRef, setDetections) =
   };
 
 
-  // Loop at rate of 100ms
+  // Loop at rate of 50ms
   setInterval(() => {
     detect(net, videoRef, videoPlayer, canvasRef, setDetections);
   }, 50);
