@@ -2,8 +2,8 @@ import * as tf from "@tensorflow/tfjs";
 import { useEffect, useRef } from "react";
 import ReactPlayer from "react-player";
 import Spinner from "react-bootstrap/Spinner";
-import { runCoco } from "../../helpers/detectMovement";
-import { detectAudio } from "../../helpers/detectAudio";
+import { runCoco } from "../../utils/detectMovement";
+import { detectAudio } from "../../utils/detectAudio";
 import "./index.scss";
 import { useVideo } from "../../context/VideoContext";
 

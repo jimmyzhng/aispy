@@ -1,13 +1,13 @@
 import "./index.scss";
 import { BsFillRecordFill } from "react-icons/bs";
-import capitalizeFirstLetter from "../../helpers/capitalizeFirstLetter";
+import capitalizeFirstLetter from "../../utils/capitalizeFirstLetter";
 import { HiOutlineStatusOffline } from "react-icons/hi";
 import { GoUnmute, GoMute } from "react-icons/go";
 
 import { useVideo } from "../../context/VideoContext";
 import { AiFillAudio } from "react-icons/ai";
 import { BsPersonFillExclamation, BsDisplayFill } from "react-icons/bs";
-import personCount from "../../helpers/personCount";
+import personCount from "../../utils/personCount";
 import RealtimeChart from "../RealtimeChart";
 import classNames from "classnames";
 import PastBroadcast from "../PastBroadcast";

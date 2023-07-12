@@ -9,7 +9,7 @@ import {
   handlePasswordChange,
   handleLogin,
   handleSignUp,
-} from "../../helpers/authHelpers";
+} from "../../utils/authHelpers";
 
 export default function Auth() {
   const {

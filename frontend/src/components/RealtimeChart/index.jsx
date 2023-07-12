@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { useVideo } from "../../context/VideoContext";
 import ApexChart from "apexcharts";
-import personCount from "../../helpers/personCount";
+import personCount from "../../utils/personCount";
 import { series, options } from "../../utils/chartOptions";
 import { useRef } from "react";
 import { useChart } from "../../context/ChartContext";
